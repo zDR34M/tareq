@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,32 +19,32 @@
         </nav>
     </header>
 
-    <section id="hero">
+    <section id="hero" class="animate__animated animate__fadeIn">
         <h1>Hello! I am [Your Name]</h1>
         <p>A [Your Profession]</p>
-        <a href="#projects" class="btn">View My Work</a>
+        <a href="#projects" class="btn animate__animated animate__pulse animate__infinite">View My Work</a>
     </section>
 
-    <section id="about">
+    <section id="about" class="animate__animated animate__fadeInUp">
         <h2>About Me</h2>
-        <p>Welcome to my portfolio website.</p>
+        <p>Welcome to my portfolio website. I specialize in creating modern and responsive web designs.</p>
     </section>
 
     <section id="projects">
-        <h2>Projects</h2>
+        <h2 class="animate__animated animate__fadeIn">Projects</h2>
         <div class="project-grid">
-            <div class="project-card">
+            <div class="project-card animate__animated animate__fadeInLeft">
                 <h3>Project 1</h3>
                 <p>Description of project 1.</p>
             </div>
-            <div class="project-card">
+            <div class="project-card animate__animated animate__fadeInRight">
                 <h3>Project 2</h3>
                 <p>Description of project 2.</p>
             </div>
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="animate__animated animate__fadeInUp">
         <h2>Contact</h2>
         <form>
             <input type="text" placeholder="Your Name" required>
