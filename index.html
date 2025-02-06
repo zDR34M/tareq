@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>My Portfolio</h1>
         <nav>
             <ul>
                 <li><a href="#about">About Me</a></li>
@@ -17,28 +17,48 @@
             </ul>
         </nav>
     </header>
+
+    <section id="hero">
+        <h1>Hello! I am [Your Name]</h1>
+        <p>A [Your Profession]</p>
+        <a href="#projects" class="btn">View My Work</a>
+    </section>
+
     <section id="about">
         <h2>About Me</h2>
-        <p>Hello! I am [Your Name], a [Your Profession]. Welcome to my portfolio website.</p>
+        <p>Welcome to my portfolio website.</p>
     </section>
+
     <section id="projects">
         <h2>Projects</h2>
-        <div class="project">
-            <h3>Project 1</h3>
-            <p>Description of project 1.</p>
-        </div>
-        <div class="project">
-            <h3>Project 2</h3>
-            <p>Description of project 2.</p>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Project 1</h3>
+                <p>Description of project 1.</p>
+            </div>
+            <div class="project-card">
+                <h3>Project 2</h3>
+                <p>Description of project 2.</p>
+            </div>
         </div>
     </section>
+
     <section id="contact">
         <h2>Contact</h2>
-        <p>You can reach me at <a href="mailto:your.email@example.com">your.email@example.com</a>.</p>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
     </section>
+
     <footer>
-        <p>&copy; 2025 [Your Name]. All rights reserved.</p>
+        <p>&copy; 2023 [Your Name]</p>
+        <div class="social-icons">
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+        </div>
     </footer>
-    <script src="script.js"></script>
 </body>
 </html>
