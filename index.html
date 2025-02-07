@@ -1,143 +1,514 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS Student Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tareq Suliman</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="https://i.postimg.cc/9fqYVvxh/logo.png" type="image/x-icon">
 </head>
+
 <body>
-    <!-- Matrix-like Background -->
-    <div class="code-bg"></div>
+  <main>
+    <aside class="sidebar " data-sidebar>
+      <div class="sidebar-info">
+        <figure class="avatar-box">
+          <img src="https://i.postimg.cc/JzBWVhW4/my-avatar.png" alt="avatar" width="80">
+        </figure>
 
-    <!-- Navigation -->
-    <nav class="sci-fi-nav">
-        <div class="nav-brand">
-            <img src="assets/profile.jpg" alt="Profile" class="profile-img">
-            <span class="terminal-prompt">$</span> Tareq_Sul
+        <div class="info-content">
+          <h1 class="name" title="Richard Hanrick">Tareq Suliman</h1>
+          <p class="title">BSc Computer Science Student</p>
         </div>
-        <ul class="nav-links">
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#skills" class="nav-link">Skills</a></li>
-            <li><a href="#education" class="nav-link">Education</a></li>
+
+        <button class="info-more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+      </div>
+
+      <div class="sidebar-info-more">
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:richard@example.com" class="contact-link">tareq.cr07@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+12133522795" class="contact-link">email me to give you</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+
+              <time datetime="1982-06-23">Sept 08</time>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>Haifa, Israel</address>
+            </div>
+          </li>
         </ul>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="about" class="hero">
-        <div class="hero-content">
-            <div class="profile-section">
-                <div class="status-led"></div>
+        <div class="separator"></div>
+
+        <ul class="social-list">
+          <li class="social-item"><a href="https://www.instagram.com/its.taaareq/" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a></li>
+          <li class="social-item"><a href="https://www.linkedin.com/in/tareq-suliman/" class="social-link">
+            <ion-icon name="logo-linkedin"></ion-icon>
+            </a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li class="navbar-item"><button class="navbar-link active" data-nav-link>About</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Resume</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Portfolio</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Blog</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Contact</button></li>
+        </ul>
+      </nav>
+
+      <article class="about active" data-page="about">
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>I am a BSc Computer Science student with a passion for problem-solving, data analytics, and cybersecurity. Proficient in Python, SQL, and Java, I enjoy working on projects that involve data analysis and secure systems.</p>
+          <p> My goal is to apply my technical expertise to real-world challenges and continuously expand my knowledge in the field of technology.</p>
+        </section>
+
+        <section class="service">
+          <h3 class="h3 service-title">What I'm doing</h3>
+
+          <ul class="service-list">
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="https://i.postimg.cc/4389jZkP/icon-design.png" alt="icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Web Design</h4>
+                <p class="service-item-text">The most modern and high-quality design made at a professional level.</p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="https://i.postimg.cc/ZqgqrqzG/icon-dev.png" alt="icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Web development</h4>
+                <p class="service-item-text">High-quality development of sites at the professional level.</p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="https://i.postimg.cc/xjLdzYxZ/icon-app.png" alt="icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Mobile apps</h4>
+                <p class="service-item-text">Professional development of applications for iOS and Android.</p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="https://i.postimg.cc/0NL8zHpx/icon-photo.png" alt="icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Photography</h4>
+                <p class="service-item-text">I make high-quality photos of any category at a professional level.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <div class="modal-container " data-modal-container>
+          <div class="overlay " data-overlay></div>
+
+          <section class="testimonials-modal">
+            <button class="modal-close-btn" data-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+
+            <div class="modal-img-wrapper">
+              <figure class="modal-avatar-box">
+                <img src="https://i.postimg.cc/zGDHfn3G/avatar-1.png" alt="Daniel Lewis" width="80" data-modal-img>
+              </figure>
+
+              <img src="https://i.postimg.cc/mZ00RwX7/icon-quote.png" alt="quote icon">
             </div>
-            <div class="hero-text">
-                <h1 class="line-1 anim-typewriter">BSc Computer Science Student</h1>
-                <div class="code-snippet">
-                    <span class="keyword">while</span>(<span class="variable">learning</span>) {<br>
-                    &nbsp;&nbsp;<span class="function">keepCoding</span>();<br>
-                    }
-                </div>
-                <div class="academic-info">
-                    <p><i class="fas fa-university"></i> The Open University Israel</p>
-                    <p><i class="fas fa-laptop-code"></i> Soon</p>
-                </div>
+
+            <div class="modal-content">
+              <h4 class="h3 modal-title" data-modal-title>Daniel Lewis</h4>
+              <time datetime="2023-06-14">14 June, 2023</time>
+
+              <div class="modal-text" data-modal-text>
+                <p>Richard was hired to create a corporate identity. It's modern, clean and with a beautiful design that got a lot of praises from colleagues and visitors. We were very pleased with the work done. He has a lot of experience and is very concerned about the needs of client.</p>
+              </div>
             </div>
+          </section>
         </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <h2 class="section-title">Academic Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-robot project-icon"></i>
-                    <h3> Soon</h3>
-                </div>
-                <p class="tech-stack"> Soon</p>
-                <p class="project-desc"> Soon...</p>
-                <div class="github-link">
-                    <i class="fab fa-github"></i>
-                    <a href="#"> View on GitHub</a>
-                </div>
-            </div>
-            <!-- Add more project cards -->
-        </div>
-    </section>
+      </article>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <h2 class="section-title">Skills: </h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <i class="fab fa-python"></i> <b>Python</b> 
-                    <i class="fa-solid fa-server"></i> <b>SQL</b>
-                    <i class="fab fa-js"></i> <b>JavaScript</b>
-                    <i class="fa-solid fa-code"></i> <b>HTML</b>
-                    <i class="fa-brands fa-css3"></i> <b>CSS</b>
-                    <i class="fa-solid fa-file-excel"></i></i> <b>Excel</b>
-                    <i class="fa-solid fa-briefcase"></i> <b>Microsoft Power BI</b>
-                    <i class="fa-solid fa-database"></i> <b>Data Management</b>
-                    <i class="fas fa-user-secret"></i> <b>SIEM & SOC</b>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar" style="width: 90%"></div>
-                </div>
-            <!-- Add more skills -->
-        </div>
-    </section>
+      <article class="resume " data-page="resume">
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
 
-    <!-- Education Section -->
-    <section id="education" class="education">
-        <h2 class="section-title">Academic Journey</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">2023 - 2024</div>
-                <div class="timeline-content">
-                    <h3>CyberSecurity Course</h3>
-                    <p>HackerU Collage</p>
-                    <div class="courses">
-                        <span class="course-tag">Linux</span>
-                        <span class="course-tag">SIEM & SOC</span>
-                        <span class="course-tag">Network Security</span>
-                        <span class="course-tag">Python</span>
-                        <span class="course-tag">JavaScript</span>
-                        <span class="course-tag">HTML</span>
-                        <span class="course-tag">CSS</span>
-                    </div>
-                </div>
+        <section class="timeline">
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2024 - 2024</div>
-                <div class="timeline-content">
-                    <h3>Data Analyst</h3>
-                    <p>BDO FINANCE ACADEMY ISRAEL</p>
-                    <div class="courses">
-                        <span class="course-tag">SQL</span>
-                        <span class="course-tag">Excel</span>
-                        <span class="course-tag">Financial Analysis</span>
-                        <span class="course-tag">Microsoft Power BI</span>
-                        <span class="course-tag">Data Management</span>
-                        <span class="course-tag">Data Vizualization</span>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2025 - 2029</div>
-                <div class="timeline-content">
-                    <h3>BSc Computer Science</h3>
-                    <p>The Open University Israel</p>
-                    <div class="courses">
-                        <span class="course-tag">Soon</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <script src="js/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+            <h3 class="h3">Education</h3>
+          </div>
+
+          <ol class="timeline-list">
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">The Open University</h4>
+              <span>2025 - NOW</span>
+              <p class="timeline-text">There I learn a wide range of topics that are essential to understanding both the theory and practical aspects of computing. This involves programming fundamentals, computer architecture, operating systems, databases, software engineering, problem solving, collaboration and communication soft skills.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">BDO Financial Academy</h4>
+              <span>2024 - 2024</span>
+              <p class="timeline-text">There i leanrt data visualization, sql, excel, data management.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">HackerU Collage</h4>
+              <span>2023 - 2024</span>
+              <p class="timeline-text">There I learnt cybersecurity and SIEM SOC.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="timeline">
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">Certifications</h3>
+          </div>
+
+          <ol class="timeline-list">
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Financial Data Analyst</h4>
+              <span>Jan, 2024</span>
+              <p class="timeline-text">BDO Financial Academy.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Certification of Achievement</h4>
+              <span>July, 2024</span>
+              <p class="timeline-text">HackerU Collage.</p>
+            </li>
+
+            <li class="timeline-item">
+              <h4 class="h4 timeline-item-title">Authorized Ethical Hacker</h4>
+              <span>July, 2024</span>
+              <p class="timeline-text">The Israeli Chamber of Information Thecnology.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="skill">
+          <h3 class="h3 skills-title">My Skills</h3>
+
+          <ul class="skills-list content-card">
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Data Analyst</h5>
+                <data value="70">70%</data>
+              </div>
+
+              <div class="skills-progress-bg">
+                <div class="skills-progress-fill" style="width: 70%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Python</h5>
+                <data value="80">80%</data>
+              </div>
+
+              <div class="skills-progress-bg">
+                <div class="skills-progress-fill" style="width: 80%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Linux</h5>
+                <data value="60">60%</data>
+              </div>
+
+              <div class="skills-progress-bg">
+                <div class="skills-progress-fill" style="width: 60%;"></div>
+              </div>
+            </li>
+
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Cybersecurity</h5>
+                <data value="50">50%</data>
+              </div>
+
+              <div class="skills-progress-bg">
+                <div class="skills-progress-fill" style="width: 50%;"></div>
+              </div>
+            </li>
+            
+            <li class="skills-item">
+              <div class="title-wrapper">
+                <h5 class="h5">Soon</h5>
+                <data value="100">100%</data>
+              </div>
+
+              <div class="skills-progress-bg">
+                <div class="skills-progress-fill" style="width: 100%;"></div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </article>
+
+      <article class="portfolio " data-page="portfolio">
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+          <ul class="filter-list">
+            <li class="filter-item"><button class="active" data-filter-btn>All</button></li>
+            <li class="filter-item"><button data-filter-btn>Web Design</button></li>
+            <li class="filter-item"><button data-filter-btn>Applications</button></li>
+            <li class="filter-item"><button data-filter-btn>Web Development</button></li>
+          </ul>
+
+          <div class="filter-select-box">
+            <button class="filter-select " data-select>
+              <div class="select-value" data-select-value>Select Category</div>
+
+              <div class="select-icon">
+                <ion-icon name="chevron-down"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="select-list">
+              <li class="select-item"><button data-select-item>All</button></li>
+              <li class="select-item"><button data-select-item>Web Design</button></li>
+              <li class="select-item"><button data-select-item>Applications</button></li>
+              <li class="select-item"><button data-select-item>Web Development</button></li>
+            </ul>
+          </div>
+
+          Soon
+        </section>
+      </article>
+
+      <article class="blog " data-page="blog">
+        <header>
+          <h2 class="h2 article-title">Blog</h2>
+        </header>
+
+        <section class="blog-posts">
+          <ul class="blog-posts-list">
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://i.postimg.cc/DysCZrWs/blog-1.jpg" alt="Design conferences in 2024" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">Feb 23, 2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Design conferences in 2024</h3>
+                  <p class="blog-text">In 2024, several exciting design conferences are set to take place, offering opportunities for professionals and enthusiasts to connect, learn, and share innovative ideas.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://i.postimg.cc/QC7qFDMs/blog-2.jpg" alt="Best fonts every designer" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-01-29">Jan 29, 2024</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Best fonts every designer</h3>
+                  <p class="blog-text">When it comes to typography, choosing the right font is essential for effective design. In this article, I'll bring a brief overview of some of the best fonts that every designer should consider incorporating into their toolkit.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://i.postimg.cc/W1T71QcL/blog-3.jpg" alt="Design digest #80" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-12-20">Dec 20, 2023</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Design digest #80</h3>
+                  <p class="blog-text">Hello, my friends. In this Design Digest, I'll show you a curated collection of the latest trends, insights, and innovations in the design world. This edition highlights key themes and discussions that are shaping the future of design.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://i.postimg.cc/2S0n8yxh/blog-4.jpg" alt="2023 UI interactions" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-11-29">Nov 29, 2023</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">2023 UI interactions</h3>
+                  <p class="blog-text">As we move into 2024, 2023 was marked by the rapidly evolution of the landscape of UI interactions, driven by advancements in technology and user expectations. Dive with me in this text to see the main areas changed in this year.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://i.postimg.cc/YCCmVkw9/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-11-12">Nov 12, 2023</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">The forgotten art of spacing</h3>
+                  <p class="blog-text">In the realm of design, spacing is often an overlooked yet crucial element that can significantly impact the overall aesthetic and functionality of a composition. This post will emphasize the importance of white space, margins, and padding in creating visually appealing and effective designs.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="blog-post-item">
+              <a href="#">
+                <figure class="blog-banner-box">
+                  <img src="https://i.postimg.cc/zBCBvP16/blog-6.jpg" alt="Design digest #79" loading="lazy">
+                </figure>
+
+                <div class="blog-content">
+                  <div class="blog-meta">
+                    <p class="blog-category">Design</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-10-20">Oct 20, 2023</time>
+                  </div>
+
+                  <h3 class="h3 blog-item-title">Design digest #79</h3>
+                  <p class="blog-text">Hi, my friends. In this Design Digest I'll focus in the tools and resources that we use daily in our projects. Also, I'll include examples of software recommendations, online courses, and design communities that foster collaboration and learning.</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </article>
+
+      <article class="contact " data-page="contact">
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+
+
+        <section class="contact-form">
+          <h3 class="h3 form-title">Contact Form</h3>
+
+          <form action="#" class="form" data-form>
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+              <input type="email" name="email" class="form-input" placeholder="Email Address" required data-form-input>
+            </div>
+
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input=""></textarea>
+
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Will Work Soon</span>
+            </button>
+          </form>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
