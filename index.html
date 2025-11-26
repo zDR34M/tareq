@@ -1,21 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quran Verse Every Hour</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareq Suliman | Security Engineer</title>
+    <meta name="description"
+        content="Portfolio of Tareq Suliman - Security Engineer, Penetration Tester, and Developer.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Placeholder for FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-  <div class="container">
-    <h1>Quran Verse Every Hour</h1>
-    <div id="verse-container">
-      <p id="verse-text">Loading verse...</p>
-      <p id="verse-reference"></p>
-    </div>
-    <button id="theme-toggle">Switch to Light Mode</button>
-  </div>
-  <script src="script.js"></script>
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- Background Animation Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <nav>
+            <div class="logo">TS</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <p class="greeting">Hello, I'm</p>
+                <h1 class="glitch" data-text="Tareq Suliman">Tareq Suliman</h1>
+                <h2 class="subtitle">DevOps & <span class="highlight" id="typewriter"></span></h2>
+                <p class="bio-text">
+                    Bridging the gap between development, operations, and security.
+                    I build secure, scalable infrastructure and automate the things that matter.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn primary">View Work</a>
+                    <a href="#contact" class="btn secondary">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="filename">devsecops.yml</span>
+                    </div>
+                    <pre><code>
+<span class="keyword">pipeline</span>:
+  <span class="keyword">stages</span>:
+    - <span class="string">build</span>
+    - <span class="string">test</span>
+    - <span class="string">security_scan</span>
+    - <span class="string">deploy</span>
+
+<span class="function">security_scan</span>:
+  <span class="keyword">script</span>:
+    - <span class="function">run_sast</span> --target .
+    - <span class="function">check_vulns</span> --severity critical
+    - <span class="comment"># Secure by design 🛡️</span>
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <div class="line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        I am a <strong>DevOps Engineer</strong> and <strong>Junior Cybersecurity Specialist</strong>.
+                        My passion lies in <strong>DevSecOps</strong>—integrating security practices into the DevOps
+                        pipeline
+                        to deliver robust and secure applications at speed.
+                    </p>
+                    <p>
+                        I don't just deploy code; I ensure it's secure from the first commit to production.
+                        Whether it's hardening servers, writing CI/CD pipelines, or hunting for vulnerabilities,
+                        I love solving complex infrastructure and security challenges.
+                    </p>
+                    <div class="skills-list">
+                        <span><i class="fab fa-docker"></i> Docker & K8s</span>
+                        <span><i class="fas fa-shield-alt"></i> Cybersecurity</span>
+                        <span><i class="fab fa-jenkins"></i> CI/CD (Jenkins/GitLab)</span>
+                        <span><i class="fab fa-python"></i> Python & Bash</span>
+                        <span><i class="fas fa-cloud"></i> Terraform (IaC)</span>
+                        <span><i class="fab fa-linux"></i> Linux Administration</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="section-header">
+                <h2>Featured Projects</h2>
+                <div class="line"></div>
+            </div>
+            <div class="project-grid">
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <div class="card-header">
+                        <i class="far fa-folder-open folder-icon"></i>
+                        <div class="card-links">
+                            <a href="https://github.com/zDR34M/aws-mini-web-app" target="_blank"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3>aws-mini-web-app</h3>
+                    <p>Flask web app deployed on AWS with Docker, ECR, EC2, ALB, Auto Scaling, DynamoDB, and S3.</p>
+                    <ul class="tech-stack">
+                        <li>Python</li>
+                        <li>AWS</li>
+                        <li>Docker</li>
+                    </ul>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card">
+                    <div class="card-header">
+                        <i class="far fa-folder-open folder-icon"></i>
+                        <div class="card-links">
+                            <a href="https://github.com/zDR34M/cyber-terminal-portfolio" target="_blank"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3>cyber-terminal-portfolio</h3>
+                    <p>A cyber-themed terminal portfolio deployed on AWS infrastructure using S3, CloudFront, and Route
+                        53.</p>
+                    <ul class="tech-stack">
+                        <li>JavaScript</li>
+                        <li>HTML</li>
+                        <li>AWS</li>
+                    </ul>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card">
+                    <div class="card-header">
+                        <i class="far fa-folder-open folder-icon"></i>
+                        <div class="card-links">
+                            <a href="https://github.com/zDR34M/DiscordMessageSender" target="_blank"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3>DiscordMessageSender</h3>
+                    <p>Sends messages via Discord.</p>
+                    <ul class="tech-stack">
+                        <li>Python</li>
+                        <li>Discord API</li>
+                    </ul>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="project-card">
+                    <div class="card-header">
+                        <i class="far fa-folder-open folder-icon"></i>
+                        <div class="card-links">
+                            <a href="https://github.com/zDR34M/Particle-Network-Animation" target="_blank"><i
+                                    class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    <h3>Particle-Network-Animation</h3>
+                    <p>A visually appealing particle network animation using HTML5 Canvas and JavaScript.</p>
+                    <ul class="tech-stack">
+                        <li>HTML</li>
+                        <li>JavaScript</li>
+                        <li>Canvas</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="contact-content">
+                <h2>Get In Touch</h2>
+                <p>I'm currently looking for new opportunities. Whether you have a question or just want to say hi, my
+                    inbox is always open.</p>
+                <a href="mailto:hello@tareqsuliman.com" class="btn primary">Say Hello</a>
+
+                <div class="social-links">
+                    <a href="https://github.com/zDR34M" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/tareq-suliman/" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Designed & Built by Tareq Suliman</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
