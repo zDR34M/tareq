@@ -67,7 +67,7 @@ circuitGroup.add(mcu);
 // Add pins to MCU
 const pinMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.8, roughness: 0.2 });
 const pinGeo = new THREE.BoxGeometry(0.04, 0.15, 0.08);
-for(let i=0; i<8; i++) {
+for (let i = 0; i < 8; i++) {
     const offset = -0.525 + i * 0.15;
     // Top
     const pinT = new THREE.Mesh(pinGeo, pinMaterial);
@@ -98,9 +98,9 @@ circuitGroup.add(header);
 
 const headerPinGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.3);
 const headerPinMat = new THREE.MeshStandardMaterial({ color: 0xffcc00, metalness: 1, roughness: 0.3 }); // Gold pins
-for(let i=0; i<10; i++) {
+for (let i = 0; i < 10; i++) {
     const pin = new THREE.Mesh(headerPinGeo, headerPinMat);
-    pin.position.set(1.4, 0.15, -0.675 + i*0.15);
+    pin.position.set(1.4, 0.15, -0.675 + i * 0.15);
     circuitGroup.add(pin);
 }
 
@@ -203,10 +203,13 @@ document.addEventListener('mousemove', (event) => {
 
 // Animation
 const clock = new THREE.Clock();
+let cumulativeSpin = 0;
+window.sceneState = { isSpinning: true, isTracesVisible: true, currentLedColorIdx: 0 };
 
 function animate() {
     requestAnimationFrame(animate);
 
+    const delta = clock.getDelta();
     const time = clock.getElapsedTime();
 
     // Rotation based on mouse
@@ -214,7 +217,10 @@ function animate() {
     targetY = mouseY * 0.5;
 
     // Continuous rotation + mouse offset
-    circuitGroup.rotation.y = time * 0.2 + targetX;
+    if (window.sceneState.isSpinning) {
+        cumulativeSpin += delta * 0.5;
+    }
+    circuitGroup.rotation.y = cumulativeSpin + targetX;
     circuitGroup.rotation.x = 0.5 + targetY; // Base tilt of 0.5 rad
 
     // Pulse LED
@@ -254,4 +260,121 @@ navLinks.querySelectorAll('a').forEach(link => {
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
     });
+});
+
+// Flashlight Cursor Effect for Glass Cards
+document.querySelectorAll('.glass-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+    });
+});
+
+// Boot Sequence Preloader & Hero Subtitle Typewriter
+document.addEventListener("DOMContentLoaded", () => {
+    const preloader = document.getElementById('preloader');
+    const termText = document.getElementById('terminal-text');
+
+    // 1. Boot Sequence Logic
+    const bootLines = [
+        "KERNEL LOADED...",
+        "INITIALIZING HARDWARE SYSTEMS... [OK]",
+        "COMPILING C++ FIRMWARE... [OK]",
+        "MOUNTING VIRTUAL FILESYSTEM... [OK]",
+        "ACTIVATING 3D ENVIRONMENT..."
+    ];
+
+    let lineIdx = 0;
+
+    function showNextBootLine() {
+        if (lineIdx < bootLines.length) {
+            const p = document.createElement('div');
+            p.innerText = "> " + bootLines[lineIdx];
+            termText.appendChild(p);
+            lineIdx++;
+            setTimeout(showNextBootLine, Math.random() * 350 + 100);
+        } else {
+            // Boot sequence done, fade out preloader
+            setTimeout(() => {
+                if (preloader) preloader.classList.add('fade-out');
+                // Trigger Hero typewriter slightly after fading out starts
+                setTimeout(startHeroTypewriter, 400);
+            }, 600);
+        }
+    }
+
+    // 2. Hero Subtitle Typewriter Logic
+    function startHeroTypewriter() {
+        const typewriter = document.querySelector('.hero .subtitle');
+        if (typewriter) {
+            const textToType = "Exploring the Future of Hardware & Systems"; // From HTML
+            typewriter.innerText = '';
+
+            let i = 0;
+            typewriter.innerHTML = '<span class="typewriter-cursor blink-cursor">_</span>';
+
+            function type() {
+                if (i < textToType.length) {
+                    typewriter.innerHTML = textToType.substring(0, i + 1) + '<span class="typewriter-cursor blink-cursor">_</span>';
+                    i++;
+                    const speed = Math.random() * (100 - 40) + 40;
+                    setTimeout(type, speed);
+                } else {
+                    typewriter.innerHTML = textToType + '<span class="typewriter-cursor blink-cursor">_</span>';
+                }
+            }
+            type();
+        }
+    }
+
+    // Kick off the boot sequence immediately
+    if (termText) {
+        setTimeout(showNextBootLine, 200);
+    } else { // fallback if preloader isn't found
+        startHeroTypewriter();
+    }
+});
+
+// -- Scroll Reveal Interactions --
+document.addEventListener("DOMContentLoaded", () => {
+    // Dynamically assign reveal class just in case to ensure coverage
+    document.querySelectorAll('.timeline-item, .skill-category, .section-header').forEach(el => el.classList.add('reveal'));
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: "0px 0px -50px 0px", threshold: 0.1 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+});
+
+// -- 3D HUD Controls --
+const ledColors = [0x00ff88, 0xff0055, 0x00aaff, 0xffdd00];
+
+document.getElementById('btn-spin')?.addEventListener('click', () => {
+    window.sceneState.isSpinning = !window.sceneState.isSpinning;
+});
+
+document.getElementById('btn-led')?.addEventListener('click', () => {
+    window.sceneState.currentLedColorIdx = (window.sceneState.currentLedColorIdx + 1) % ledColors.length;
+    const newColor = ledColors[window.sceneState.currentLedColorIdx];
+    if (typeof ledMat !== 'undefined') {
+        ledMat.color.setHex(newColor);
+        ledMat.emissive.setHex(newColor);
+    }
+});
+
+document.getElementById('btn-traces')?.addEventListener('click', () => {
+    window.sceneState.isTracesVisible = !window.sceneState.isTracesVisible;
+    if (typeof traceMat !== 'undefined') {
+        traceMat.visible = window.sceneState.isTracesVisible;
+    }
 });
