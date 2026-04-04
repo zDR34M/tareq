@@ -4,18 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tareq Suliman</title>
+    <title>Tareq Suliman - Electronics Engineering Student</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Background layer for grid -->
+    <div class="cyber-grid"></div>
     <div id="canvas-container"></div>
 
     <nav class="glass-nav">
-        <div class="logo">TS</div>
+        <div class="logo">TS<span class="blink">_</span></div>
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
             <span></span>
             <span></span>
@@ -23,175 +25,166 @@
         </button>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home">Home</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Curriculum</a></li>
+            <li><a href="#skills">Skills Focus</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
     <main>
         <section id="home" class="hero">
-            <div class="glass-card hero-content">
+            <div class="hero-content glass-card">
+                <div class="tech-badge">
+                    <span class="dot"></span> Practical Electronics Engineer • Technion
+                </div>
                 <h1>Tareq <span class="gradient-text">Suliman</span></h1>
-                <h2 style="font-size: 2rem; margin-bottom: 1rem; color: var(--text-main);">DevOps Engineer</h2>
-                <p>Well versed in AWS, Kubernetes & CI/CD</p>
-                <a href="#experience" class="cta-button">View Experience</a>
+                <h2 class="subtitle">Exploring the Future of Hardware & Systems</h2>
+                <p>A student passionate about bridging the gap between hardware and software through modern programmable components, circuit design, and hands-on system integration.</p>
+                <div class="hero-actions">
+                    <a href="#education" class="cta-button primary">Explore My Curriculum</a>
+                    <a href="#contact" class="cta-button secondary">Get In Touch</a>
+                </div>
             </div>
         </section>
 
-        <section id="experience" class="projects">
-            <h2>Professional Experience</h2>
-            <div class="glass-card experience-card" style="padding: 2rem; max-width: 800px; margin: 0 auto;">
-                <h3 style="font-size: 1.5rem; color: var(--accent); margin-bottom: 0.5rem;">DevOps Engineer at Storeel
-                </h3>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">2024 - Current</p>
-                <ul style="list-style: none; text-align: left; display: flex; flex-direction: column; gap: 0.8rem;">
-                    <li>🔹 Working Daily with Terraform & Jenkins for provisioning</li>
-                    <li>🔹 Experienced with migrating on-prem environments to cloud environment</li>
-                    <li>🔹 Daily work with containers deployment & management - Docker + Kubernetes</li>
-                    <li>🔹 Daily work in AWS - EC2, S3, CloudWatch, ELB, RDS, ASG, EKS, Serverless & more</li>
-                    <li>🔹 Developed Python & Bash Automations for both OS level & Cloud level solutions</li>
-                    <li>🔹 Infrastructure as code with Terraform, Ansible, using Git workflows for efficient change
-                        management</li>
-                </ul>
+        <!-- Education / Curriculum Section -->
+        <section id="education" class="curriculum">
+            <div class="section-header glass-header">
+                <h2>My <span class="gradient-text">Academic Path</span></h2>
+                <p>What I am learning at the National School for Practical Engineers</p>
             </div>
-        </section>
-
-        <section id="projects" class="projects-section">
-            <h2>Featured Projects</h2>
-            <div class="project-grid">
-                <div class="glass-card project-card">
-                    <div class="project-icon">👽</div>
-                    <h3>Rick & Morty DevOps Exercise</h3>
-                    <p>This repository contains a complete end-to-end DevOps solution for the Rick & Morty API exercise,
-                        including application logic, containerization, Kubernetes deployment, Helm chart packaging, and
-                        CI/CD automation.
-                        The project was built as part of a DevOps Engineer home assignment and demonstrates real-world
-                        DevOps best practices.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">AWS</span>
-                        <span class="project-tag">Docker</span>
-                        <span class="project-tag">Kubernetes</span>
-                        <span class="project-tag">Helm</span>
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">GitHub Actions</span>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card timeline-content">
+                        <h3>⚡ Core Engineering Foundations</h3>
+                        <p>Building a robust theoretical base.</p>
+                        <ul class="course-list">
+                            <li>Mathematics & Physics</li>
+                            <li>Electrical Networks</li>
+                            <li>Principles of Analog & Digital Electronics</li>
+                        </ul>
                     </div>
-                    <a href="https://github.com/zDR34M/rick-morty-devops" target="_blank" class="project-link">View on
-                        GitHub →</a>
                 </div>
 
-                <div class="glass-card project-card">
-                    <div class="project-icon">🖧</div>
-                    <h3>AWS Mini Web App</h3>
-                    <p>Flask web app deployed on AWS with Docker, ECR, EC2, ALB, Auto Scaling, DynamoDB, and S3.
-                        Features visit counter, file uploads, and health monitoring.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Flask</span>
-                        <span class="project-tag">Docker</span>
-                        <span class="project-tag">AWS</span>
-                        <span class="project-tag">DynamoDB</span>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card timeline-content">
+                        <h3>💻 Software & Programming</h3>
+                        <p>Mastering languages to manage and control complex hardware.</p>
+                        <ul class="course-list">
+                            <li>Intro to Computer Science</li>
+                            <li>C / C++ Programming</li>
+                            <li>Advanced Programming & Assembler</li>
+                        </ul>
                     </div>
-                    <a href="https://github.com/zDR34M/aws-mini-web-app" target="_blank" class="project-link">View on
-                        GitHub →</a>
                 </div>
 
-                <div class="glass-card project-card">
-                    <div class="project-icon">🖥️</div>
-                    <h3>Server Health Monitoring Tool</h3>
-                    <p>Python-based monitoring tool that tracks CPU, RAM, and disk usage with automated alerts. Can run
-                        automatically every 5 minutes using cron.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">psutil</span>
-                        <span class="project-tag">Linux</span>
-                        <span class="project-tag">Monitoring</span>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card timeline-content">
+                        <h3>🛠️ Modern Hardware & Labs</h3>
+                        <p>Hands-on design using sophisticated industry tools.</p>
+                        <ul class="course-list">
+                            <li>Hardware Description Languages (VHDL/AHDL)</li>
+                            <li>Analog Simulation (SPICE)</li>
+                            <li>Microcomputers & Microprocessors</li>
+                            <li>Digital Systems Labs (View Logic Labs)</li>
+                        </ul>
                     </div>
-                    <a href="https://github.com/zDR34M/server-monitor" target="_blank" class="project-link">View on
-                        GitHub →</a>
                 </div>
 
-                <div class="glass-card project-card">
-                    <div class="project-icon">🔧</div>
-                    <h3>DevOps Projects Collection</h3>
-                    <p>Collection of DevOps projects including DNS Server Setup with BIND9 and Nagios Monitoring of
-                        remote servers with comprehensive documentation.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">BIND9</span>
-                        <span class="project-tag">Nagios</span>
-                        <span class="project-tag">NRPE</span>
-                        <span class="project-tag">Linux</span>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card timeline-content">
+                        <h3>🎓 State Final Project</h3>
+                        <p>Integrating everything into a complete, industry-grade system.</p>
+                        <ul class="course-list">
+                            <li>System Definition & Requirements</li>
+                            <li>Electrical & Mechanical Construction</li>
+                            <li>Complete Hardware & Software Implementation</li>
+                        </ul>
                     </div>
-                    <a href="https://github.com/zDR34M/devops-projects" target="_blank" class="project-link">View on
-                        GitHub →</a>
-                </div>
-
-                <div class="glass-card project-card">
-                    <div class="project-icon">⚙️</div>
-                    <h3>Jenkins CI/CD Test</h3>
-                    <p>Jenkins pipeline testing and configuration project demonstrating continuous integration and
-                        deployment workflows.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Jenkins</span>
-                        <span class="project-tag">CI/CD</span>
-                        <span class="project-tag">Automation</span>
-                    </div>
-                    <a href="https://github.com/zDR34M/jenkins-test" target="_blank" class="project-link">View on GitHub
-                        →</a>
-                </div>
-
-                <div class="glass-card project-card">
-                    <div class="project-icon">✨</div>
-                    <h3>Particle Network Animation</h3>
-                    <p>Visually appealing animation made with HTML5 Canvas and JavaScript. Particles move and connect
-                        with lines when close, creating a network effect.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">JavaScript</span>
-                        <span class="project-tag">HTML5 Canvas</span>
-                        <span class="project-tag">Animation</span>
-                    </div>
-                    <a href="https://github.com/zDR34M/Particle-Network-Animation" target="_blank"
-                        class="project-link">View on GitHub →</a>
                 </div>
             </div>
         </section>
 
         <section id="skills" class="about">
-            <div class="glass-card about-content">
-                <h2>Technical Skills</h2>
-                <div class="skills-grid"
-                    style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem;">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">Bash</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">AWS</span>
-                    <span class="skill-tag">Kubernetes (EKS, Minikube)</span>
-                    <span class="skill-tag">Ansible</span>
-                    <span class="skill-tag">CI/CD</span>
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">Jenkins</span>
-                    <span class="skill-tag">Terraform</span>
-                    <span class="skill-tag">Databases</span>
-                    <span class="skill-tag">Networking</span>
-                    <span class="skill-tag">GitHub Actions</span>
+            <div class="section-header glass-header">
+                <h2>Technical <span class="gradient-text">Focus Areas</span></h2>
+                <p>Technologies, languages, and methodologies I am mastering.</p>
+            </div>
+            <div class="glass-card skills-container">
+                <div class="skills-category-wrapper">
+                    <div class="skill-category">
+                        <h4><span class="icon">🔌</span> Hardware & Circuits</h4>
+                        <div class="skills-grid">
+                            <span class="skill-tag">Circuit Design</span>
+                            <span class="skill-tag">PCB Layout</span>
+                            <span class="skill-tag">Microprocessors</span>
+                            <span class="skill-tag">Soldering</span>
+                            <span class="skill-tag">Digital/Analog Logic</span>
+                            <span class="skill-tag">Sensors & Timers</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4><span class="icon">⌨️</span> Software & Firmware</h4>
+                        <div class="skills-grid">
+                            <span class="skill-tag">C / C++</span>
+                            <span class="skill-tag">Assembler</span>
+                            <span class="skill-tag">Hardware Desc. (VHDL)</span>
+                            <span class="skill-tag">Arduino Programming</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h4><span class="icon">🔬</span> Tools & Simulation</h4>
+                        <div class="skills-grid">
+                            <span class="skill-tag">SPICE Simulation</span>
+                            <span class="skill-tag">View Logic</span>
+                            <span class="skill-tag">CAD / Prototyping</span>
+                            <span class="skill-tag">Testing & QA</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="contact">
-            <div class="glass-card contact-form-container">
-                <h2>Get In Touch</h2>
-                <center>
-                    <p><a href="mailto:tareq.cr07@gmail.com" target="_blank">Mail</a>
-                        | <a href="https://www.linkedin.com/in/tareq-suliman/" target="_blank">Linkedin</a> | <a
-                            href="https://github.com/zDR34M" target="_blank">GitHub</a></p>
-                </center>
+            <div class="section-header glass-header">
+                <h2>Let's <span class="gradient-text">Connect</span></h2>
+                <p>Always open to discussing electronics, hardware, and opportunities.</p>
+            </div>
+            <div class="glass-card contact-container">
+                <div class="social-links">
+                    <a href="mailto:tareq.cr07@gmail.com" target="_blank" class="social-btn">
+                        <span class="icon">✉️</span>
+                        <div class="social-details">
+                            <span class="social-name">Email</span>
+                            <span class="social-val">tareq.cr07@gmail.com</span>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tareq-suliman/" target="_blank" class="social-btn">
+                        <span class="icon">💼</span>
+                        <div class="social-details">
+                            <span class="social-name">LinkedIn</span>
+                            <span class="social-val">@tareq-suliman</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/zDR34M" target="_blank" class="social-btn">
+                        <span class="icon">⌨️</span>
+                        <div class="social-details">
+                            <span class="social-name">GitHub</span>
+                            <span class="social-val">@zDR34M</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </section>
     </main>
 
     <script type="module" src="script.js"></script>
 </body>
-
 </html>

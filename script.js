@@ -25,13 +25,13 @@ const mainLight = new THREE.DirectionalLight(0xffffff, 1);
 mainLight.position.set(10, 10, 10);
 scene.add(mainLight);
 
-// Accent Color Light (Cyan)
-const accentLight = new THREE.PointLight(0x00f2ff, 30, 50);
+// Accent Color Light (Green)
+const accentLight = new THREE.PointLight(0x00ff88, 30, 50);
 accentLight.position.set(-5, 5, 5);
 scene.add(accentLight);
 
-// Secondary Blue Light
-const secondaryLight = new THREE.PointLight(0x00c3ff, 30, 50);
+// Secondary Green Light
+const secondaryLight = new THREE.PointLight(0x00cc66, 30, 50);
 secondaryLight.position.set(5, -5, 5);
 scene.add(secondaryLight);
 
@@ -40,30 +40,125 @@ const fillLight = new THREE.PointLight(0x0055ff, 20, 50);
 fillLight.position.set(0, 5, -5);
 scene.add(fillLight);
 
-// Liquid Object
-const geometry = new THREE.IcosahedronGeometry(1.5, 20); // High detail for smooth waves
-const originalPositions = geometry.attributes.position.array.slice(); // Clone original positions
+// --- Electronic Circuit Board ---
+const circuitGroup = new THREE.Group();
 
-const material = new THREE.MeshPhysicalMaterial({
-    color: 0x00f2ff, // Slight cyan tint
-    emissive: 0x006167, // Deep blue glow
-    emissiveIntensity: 0.2,
-    metalness: 0.2,
-    roughness: 0,
-    transmission: 1,
-    thickness: 2,
-    ior: 1.5,
-    clearcoat: 1,
-    clearcoatRoughness: 0,
-    side: THREE.DoubleSide,
-    envMapIntensity: 1,
-    iridescence: 0.5,
-    iridescenceIOR: 1.3,
-    iridescenceThicknessRange: [100, 400]
+// 1. PCB Base
+const pcbGeometry = new THREE.BoxGeometry(3.5, 0.05, 2.5);
+const pcbMaterial = new THREE.MeshStandardMaterial({
+    color: 0x003311, // Dark green PCB
+    roughness: 0.7,
+    metalness: 0.2
 });
+const pcb = new THREE.Mesh(pcbGeometry, pcbMaterial);
+circuitGroup.add(pcb);
 
-const liquidSphere = new THREE.Mesh(geometry, material);
-scene.add(liquidSphere);
+// 2. Main Microcontroller Chip
+const mcuGeometry = new THREE.BoxGeometry(1.2, 0.1, 1.2);
+const icMaterial = new THREE.MeshStandardMaterial({
+    color: 0x111111, // Dark grey/black
+    roughness: 0.6,
+    metalness: 0.4
+});
+const mcu = new THREE.Mesh(mcuGeometry, icMaterial);
+mcu.position.set(0, 0.075, 0); // slightly above PCB
+circuitGroup.add(mcu);
+
+// Add pins to MCU
+const pinMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.8, roughness: 0.2 });
+const pinGeo = new THREE.BoxGeometry(0.04, 0.15, 0.08);
+for(let i=0; i<8; i++) {
+    const offset = -0.525 + i * 0.15;
+    // Top
+    const pinT = new THREE.Mesh(pinGeo, pinMaterial);
+    pinT.position.set(offset, 0.05, -0.6);
+    circuitGroup.add(pinT);
+    // Bottom
+    const pinB = new THREE.Mesh(pinGeo, pinMaterial);
+    pinB.position.set(offset, 0.05, 0.6);
+    circuitGroup.add(pinB);
+    // Left
+    const pinL = new THREE.Mesh(pinGeo, pinMaterial);
+    pinL.rotation.y = Math.PI / 2;
+    pinL.position.set(-0.6, 0.05, offset);
+    circuitGroup.add(pinL);
+    // Right
+    const pinR = new THREE.Mesh(pinGeo, pinMaterial);
+    pinR.rotation.y = Math.PI / 2;
+    pinR.position.set(0.6, 0.05, offset);
+    circuitGroup.add(pinR);
+}
+
+// 3. Header Pins
+const headerHousingGeo = new THREE.BoxGeometry(0.2, 0.15, 1.5);
+const headerHousingMat = new THREE.MeshStandardMaterial({ color: 0x222222 });
+const header = new THREE.Mesh(headerHousingGeo, headerHousingMat);
+header.position.set(1.4, 0.1, 0);
+circuitGroup.add(header);
+
+const headerPinGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.3);
+const headerPinMat = new THREE.MeshStandardMaterial({ color: 0xffcc00, metalness: 1, roughness: 0.3 }); // Gold pins
+for(let i=0; i<10; i++) {
+    const pin = new THREE.Mesh(headerPinGeo, headerPinMat);
+    pin.position.set(1.4, 0.15, -0.675 + i*0.15);
+    circuitGroup.add(pin);
+}
+
+// 4. Smaller ICs
+const smallIcGeo = new THREE.BoxGeometry(0.4, 0.08, 0.6);
+const smallIc1 = new THREE.Mesh(smallIcGeo, icMaterial);
+smallIc1.position.set(-1.2, 0.065, 0.5);
+circuitGroup.add(smallIc1);
+
+const smallIc2 = new THREE.Mesh(smallIcGeo, icMaterial);
+smallIc2.position.set(-1.2, 0.065, -0.5);
+circuitGroup.add(smallIc2);
+
+// 5. Capacitors (Cylinders)
+const capGeo = new THREE.CylinderGeometry(0.1, 0.1, 0.3);
+const capMat = new THREE.MeshStandardMaterial({ color: 0x111166, roughness: 0.4, metalness: 0.6 }); // Dark blue caps
+const capTopMat = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.8 }); // Silver top
+
+const createCapacitor = (x, z) => {
+    const cap = new THREE.Group();
+    const body = new THREE.Mesh(capGeo, capMat);
+    body.position.y = 0.15;
+    const top = new THREE.Mesh(new THREE.CylinderGeometry(0.101, 0.101, 0.05), capTopMat);
+    top.position.y = 0.28;
+    cap.add(body);
+    cap.add(top);
+    cap.position.set(x, 0.025, z);
+    circuitGroup.add(cap);
+};
+
+createCapacitor(-0.5, 0.8);
+createCapacitor(-0.2, 0.8);
+createCapacitor(0.8, -0.8);
+
+// 6. Glowing LED
+const ledGeo = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+const ledMat = new THREE.MeshStandardMaterial({ color: 0x00ff88, emissive: 0x00ff88, emissiveIntensity: 2 });
+const led = new THREE.Mesh(ledGeo, ledMat);
+led.position.set(0.8, 0.075, 0.8);
+circuitGroup.add(led);
+let pulseLed = led;
+
+// 7. Decorative Traces (Lines on the board)
+const traceMat = new THREE.LineBasicMaterial({ color: 0x00aa55 });
+const addTrace = (points) => {
+    const p3d = points.map(p => new THREE.Vector3(p[0], 0.03, p[1]));
+    const geo = new THREE.BufferGeometry().setFromPoints(p3d);
+    const trace = new THREE.Line(geo, traceMat);
+    circuitGroup.add(trace);
+};
+
+addTrace([[-1.2, 0.2], [-0.8, 0.2], [-0.6, 0]]);
+addTrace([[-1.2, 0.8], [-1.0, 0.8], [-0.6, 0.4], [-0.6, 0.2]]);
+addTrace([[0.6, 0.2], [0.8, 0.4], [1.2, 0.4]]);
+addTrace([[0.6, -0.2], [1.0, -0.2], [1.2, -0.4]]);
+addTrace([[-0.2, -0.6], [-0.2, -0.8], [-0.8, -0.8]]);
+
+scene.add(circuitGroup);
 
 // Background Particles
 const particlesGeometry = new THREE.BufferGeometry();
@@ -114,36 +209,18 @@ function animate() {
 
     const time = clock.getElapsedTime();
 
-    // Liquid Wave Animation
-    const positionAttribute = geometry.attributes.position;
-    const vertex = new THREE.Vector3();
-
-    for (let i = 0; i < positionAttribute.count; i++) {
-        vertex.fromArray(originalPositions, i * 3);
-
-        // Calculate noise based on vertex position and time
-        const noiseValue = noise3D(
-            vertex.x * noiseScale + time * noiseSpeed,
-            vertex.y * noiseScale + time * noiseSpeed,
-            vertex.z * noiseScale + time * noiseSpeed
-        );
-
-        // Displace vertex along its normal (which is just its normalized position for a sphere)
-        vertex.normalize().multiplyScalar(1.5 + noiseValue * displacementScale);
-
-        positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
-    }
-
-    geometry.computeVertexNormals(); // Critical for correct lighting on waves
-    positionAttribute.needsUpdate = true;
-
     // Rotation based on mouse
     targetX = mouseX * 0.5;
     targetY = mouseY * 0.5;
 
-    liquidSphere.rotation.y += 0.002;
-    liquidSphere.rotation.x += (targetY - liquidSphere.rotation.x) * 0.05;
-    liquidSphere.rotation.y += (targetX - liquidSphere.rotation.y) * 0.05;
+    // Continuous rotation + mouse offset
+    circuitGroup.rotation.y = time * 0.2 + targetX;
+    circuitGroup.rotation.x = 0.5 + targetY; // Base tilt of 0.5 rad
+
+    // Pulse LED
+    if (typeof pulseLed !== 'undefined') {
+        pulseLed.material.emissiveIntensity = 1.5 + Math.sin(time * 5);
+    }
 
     // Particles rotation
     particlesMesh.rotation.y = -time * 0.05;
