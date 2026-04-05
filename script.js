@@ -278,6 +278,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById('preloader');
     const termText = document.getElementById('terminal-text');
 
+    // --- Trilingual Language Toggle ---
+    const langToggle = document.getElementById('langToggle');
+    const languages = ['en', 'he', 'ar'];
+    let currentLangIdx = 0;
+
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            currentLangIdx = (currentLangIdx + 1) % languages.length;
+            const nextLang = languages[currentLangIdx];
+            document.body.classList.remove('lang-mode-en', 'lang-mode-he', 'lang-mode-ar', 'rtl-mode');
+            document.body.classList.add(`lang-mode-${nextLang}`);
+            if (nextLang === 'he' || nextLang === 'ar') {
+                document.body.classList.add('rtl-mode');
+            }
+        });
+    }
+
     // 1. Boot Sequence Logic
     const bootLines = [
         "KERNEL LOADED...",
@@ -300,6 +317,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Boot sequence done, fade out preloader
             setTimeout(() => {
                 if (preloader) preloader.classList.add('fade-out');
+                // Show language panel after boot
+                const langPanel = document.getElementById('langControlPanel');
+                if (langPanel) langPanel.classList.add('visible');
                 // Trigger Hero typewriter slightly after fading out starts
                 setTimeout(startHeroTypewriter, 400);
             }, 600);
@@ -377,4 +397,19 @@ document.getElementById('btn-traces')?.addEventListener('click', () => {
     if (typeof traceMat !== 'undefined') {
         traceMat.visible = window.sceneState.isTracesVisible;
     }
+});
+
+// -- Back to Top Button --
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+});
+
+backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
