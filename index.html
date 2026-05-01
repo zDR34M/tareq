@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tareq Suliman - Electronics Engineering Student</title>
+    <title>Tareq Suliman | Practical Engineer — Embedded Systems & Firmware</title>
+    <meta name="description" content="Portfolio of Tareq Suliman — Practical Electronics Engineer specializing in Embedded Systems, Firmware Development, and Hardware Validation at the Technion.">
     <link rel="icon" type="image/svg+xml" href="electronics.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&family=Cairo:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Import Map for Three.js Modern Modules -->
     <script type="importmap">
         {
@@ -24,361 +23,577 @@
 </head>
 
 <body class="lang-mode-en">
+
     <!-- Terminal Boot Preloader -->
     <div id="preloader">
-        <div class="terminal-container">
-            <div id="terminal-text"></div>
-            <div class="terminal-cursor blink-cursor">_</div>
+        <div class="boot-terminal">
+            <div class="boot-terminal__header">
+                <span class="boot-dot boot-dot--red"></span>
+                <span class="boot-dot boot-dot--yellow"></span>
+                <span class="boot-dot boot-dot--green"></span>
+                <span class="boot-terminal__title">tareq@technion:~$</span>
+            </div>
+            <div class="boot-terminal__body">
+                <div id="terminal-text"></div>
+                <span class="terminal-cursor blink-cursor">▋</span>
+            </div>
         </div>
     </div>
 
-    <!-- Background layer for grid -->
+    <!-- Background Layers -->
+    <div class="bg-radial"></div>
     <div class="cyber-grid"></div>
     <div id="canvas-container"></div>
 
-    <nav class="glass-nav">
-        <div class="logo">TS<span class="blink">_</span></div>
+    <!-- Navigation -->
+    <nav class="glass-nav" id="mainNav">
+        <div class="logo">
+            <span class="logo__bracket">&lt;</span>TS<span class="logo__bracket">/&gt;</span>
+            <span class="logo__blink">▋</span>
+        </div>
         <div class="nav-controls">
-            <!-- Language toggle removed from here and moved to fixed floating panel! -->
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </div>
         <ul class="nav-links" id="navLinks">
-            <li><a href="#home"><span class="lang-en">Home</span><span class="lang-he">ראשי</span><span
-                        class="lang-ar">الرئيسية</span></a></li>
-            <li><a href="#education"><span class="lang-en">Curriculum</span><span class="lang-he">תוכנית
-                        לימודים</span><span class="lang-ar">المناهج الدراسية</span></a></li>
-            <li><a href="#skills"><span class="lang-en">Skills Focus</span><span class="lang-he">התמחות
-                        מקצועית</span><span class="lang-ar">المهارات</span></a></li>
-            <li><a href="#contact"><span class="lang-en">Contact</span><span class="lang-he">צור קשר</span><span
-                        class="lang-ar">اتصل بي</span></a></li>
+            <li><a href="#home" class="nav-link">
+                <span class="nav-link__prefix">//</span>
+                <span class="lang-en">Home</span><span class="lang-he">ראשי</span><span class="lang-ar">الرئيسية</span>
+            </a></li>
+            <li><a href="#stack" class="nav-link">
+                <span class="nav-link__prefix">//</span>
+                <span class="lang-en">Stack</span><span class="lang-he">טכנולוגיות</span><span class="lang-ar">التقنيات</span>
+            </a></li>
+            <li><a href="#education" class="nav-link">
+                <span class="nav-link__prefix">//</span>
+                <span class="lang-en">Education</span><span class="lang-he">השכלה</span><span class="lang-ar">التعليم</span>
+            </a></li>
+
+            <li><a href="#contact" class="nav-link">
+                <span class="nav-link__prefix">//</span>
+                <span class="lang-en">Contact</span><span class="lang-he">צור קשר</span><span class="lang-ar">اتصل بي</span>
+            </a></li>
         </ul>
     </nav>
 
     <main>
+
+        <!-- ═══════════════════════ HERO ═══════════════════════ -->
         <section id="home" class="hero">
-            <div class="hero-content glass-card">
-                <div class="tech-badge">
-                    <span class="dot"></span> <span class="lang-en">Practical Electronics Engineer •
-                        Technion</span><span class="lang-he">הנדסאי אלקטרוניקה • טכניון</span><span
-                        class="lang-ar">مهندس إلكترونيات عملي • التخنيون</span>
+            <div class="hero__layout">
+
+                <!-- Left: Main Content -->
+                <div class="hero__content glass-card reveal-hero">
+                    <div class="tech-badge">
+                        <span class="tech-badge__dot"></span>
+                        <span class="lang-en">Practical Electronics Engineer · Technion</span>
+                        <span class="lang-he">הנדסאי אלקטרוניקה · טכניון</span>
+                        <span class="lang-ar">مهندس إلكترونيات عملي · التخنيون</span>
+                    </div>
+
+                    <h1 class="hero__name">
+                        <span class="lang-en">Tareq <span class="gradient-text">Suliman</span></span>
+                        <span class="lang-he">טארק <span class="gradient-text">סולימאן</span></span>
+                        <span class="lang-ar">طارق <span class="gradient-text">سليمان</span></span>
+                    </h1>
+
+                    <p class="hero__tagline">
+                        <span class="lang-en">Practical Engineer</span>
+                        <span class="lang-he">מהנדס מעשי</span>
+                        <span class="lang-ar">مهندس عملي</span>
+                    </p>
+
+                    <p class="hero__description">
+                        <span class="lang-en">Specializing in Embedded Systems, Firmware Development, and Hardware Validation.</span>
+                        <span class="lang-he">מתמחה במערכות משובצות, פיתוח קושחה ואימות חומרה.</span>
+                        <span class="lang-ar">متخصص في الأنظمة المدمجة وتطوير البرامج الثابتة والتحقق من الأجهزة.</span>
+                    </p>
+
+                    <div class="hero__actions">
+                        <a href="#education" class="cta-button cta-button--primary">
+                            <span class="lang-en">View Curriculum</span>
+                            <span class="lang-he">לתוכנית הלימודים</span>
+                            <span class="lang-ar">المناهج الدراسية</span>
+                        </a>
+                        <a href="#contact" class="cta-button cta-button--secondary">
+                            <span class="lang-en">Let's Connect</span>
+                            <span class="lang-he">צור קשר</span>
+                            <span class="lang-ar">تواصل</span>
+                        </a>
+                    </div>
+
+                    <div class="status-badge">
+                        <span class="status-pulse"></span>
+                        <span class="lang-en">Year 1 Student — Open to Learning &amp; Opportunities</span>
+                        <span class="lang-he">סטודנט שנה א׳ — פתוח ללמידה והזדמנויות</span>
+                        <span class="lang-ar">طالب السنة الأولى — منفتح على التعلم والفرص</span>
+                    </div>
                 </div>
-                <h1><span class="lang-en">Tareq</span><span class="lang-he">טארק</span><span class="lang-ar">طارق</span>
-                    <span class="gradient-text"><span class="lang-en">Suliman</span><span
-                            class="lang-he">סולימאן</span><span class="lang-ar">سليمان</span></span>
-                </h1>
-                <h2 class="subtitle"></h2> <!-- Driven by JS -->
-                <p>
-                    <span class="lang-en">A student passionate about bridging the gap between hardware and software
-                        through modern programmable components, circuit design, and hands-on system integration.</span>
-                    <span class="lang-he">סטודנט בעל תשוקה לחבר בין חומרה לתוכנה דרך רכיבים מתוכנתים מודרניים, תכנון
-                        מעגלים ושילוב מערכות אלקטרוניות באופן מעשי.</span>
-                    <span class="lang-ar">طالب شغوف بسد الفجوة بين الأجهزة والبرامج من خلال المكونات القابلة للبرمجة
-                        الحديثة وتصميم الدوائر والتكامل العملي للأنظمة.</span>
-                </p>
-                <div class="hero-actions">
-                    <a href="#education" class="cta-button primary"><span class="lang-en">Explore My
-                            Curriculum</span><span class="lang-he">חקור את תוכנית הלימודים שלי</span><span
-                            class="lang-ar">استكشف مناهجي الدراسية</span></a>
-                    <a href="#contact" class="cta-button secondary"><span class="lang-en">Get In Touch</span><span
-                            class="lang-he">צור קשר</span><span class="lang-ar">ابق على تواصل</span></a>
+
+                <!-- Right: Terminal Widget -->
+                <div class="hero__terminal glass-card reveal-hero reveal-hero--delay">
+                    <div class="terminal__header">
+                        <span class="t-dot t-dot--red"></span>
+                        <span class="t-dot t-dot--yellow"></span>
+                        <span class="t-dot t-dot--green"></span>
+                        <span class="terminal__title">firmware_status.sh</span>
+                    </div>
+                    <div class="terminal__body" id="heroTerminal">
+                        <!-- Filled by JS -->
+                    </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- Education / Curriculum Section -->
-        <section id="education" class="curriculum">
-            <div class="section-header glass-header reveal">
-                <h2><span class="lang-en">My</span><span class="lang-he">המסלול</span><span class="lang-ar">مساري
-                    </span> <span class="gradient-text"><span class="lang-en">Academic Path</span><span
-                            class="lang-he">האקדמי שלי</span><span class="lang-ar">الأكاديمي</span></span></h2>
-                <p>
-                    <span class="lang-en">What I am learning at the National School for Practical Engineers</span>
-                    <span class="lang-he">מה שאני לומד בבית הספר הארצי להנדסאים בקריית הטכניון</span>
-                    <span class="lang-ar">ما أتعلمه في المدرسة الوطنية للمهندسين العمليين</span>
+        <!-- ═══════════════════════ TECH STACK ═══════════════════════ -->
+        <section id="stack" class="stack-section">
+            <div class="section-header reveal">
+                <p class="section-label">
+                    <span class="lang-en">// Technical DNA</span>
+                    <span class="lang-he">// מבנה טכני</span>
+                    <span class="lang-ar">// التخصص التقني</span>
+                </p>
+                <h2>
+                    <span class="lang-en">Core <span class="gradient-text">Stack</span></span>
+                    <span class="lang-he">ה<span class="gradient-text">ליבה</span> הטכנולוגית</span>
+                    <span class="lang-ar"><span class="gradient-text">التقنيات</span> الأساسية</span>
+                </h2>
+                <p class="section-sub">
+                    <span class="lang-en">Technologies, languages, and tools powering every build.</span>
+                    <span class="lang-he">טכנולוגיות, שפות וכלים המניעים כל בנייה.</span>
+                    <span class="lang-ar">التقنيات واللغات والأدوات التي تشغّل كل مشروع.</span>
+                </p>
+            </div>
+
+            <div class="stack-grid">
+
+                <div class="stack-card glass-card reveal">
+                    <div class="stack-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <div class="stack-card__lang">C</div>
+                    <h3 class="stack-card__name">
+                        <span class="lang-en">C Programming</span>
+                        <span class="lang-he">תכנות C</span>
+                        <span class="lang-ar">برمجة C</span>
+                    </h3>
+                    <p class="stack-card__desc">
+                        <span class="lang-en">Low-level memory management, pointer arithmetic, and bare-metal firmware development.</span>
+                        <span class="lang-he">ניהול זיכרון ברמה נמוכה, אריתמטיקת מצביעים ופיתוח קושחה.</span>
+                        <span class="lang-ar">إدارة الذاكرة منخفضة المستوى وتطوير البرامج الثابتة.</span>
+                    </p>
+                    <div class="stack-card__tags">
+                        <span>Pointers</span><span>Structs</span><span>Embedded C</span>
+                    </div>
+                </div>
+
+                <div class="stack-card glass-card reveal">
+                    <div class="stack-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    </div>
+                    <div class="stack-card__lang">C++</div>
+                    <h3 class="stack-card__name">
+                        <span class="lang-en">C++ Systems</span>
+                        <span class="lang-he">מערכות C++</span>
+                        <span class="lang-ar">أنظمة C++</span>
+                    </h3>
+                    <p class="stack-card__desc">
+                        <span class="lang-en">OOP design patterns, RAII, and performance-critical systems programming.</span>
+                        <span class="lang-he">תבניות עיצוב OOP, RAII ותכנות מערכות קריטי לביצועים.</span>
+                        <span class="lang-ar">أنماط التصميم OOP وبرمجة الأنظمة الحرجة.</span>
+                    </p>
+                    <div class="stack-card__tags">
+                        <span>OOP</span><span>RAII</span><span>Templates</span>
+                    </div>
+                </div>
+
+                <div class="stack-card glass-card reveal">
+                    <div class="stack-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                    </div>
+                    <div class="stack-card__lang">ASM</div>
+                    <h3 class="stack-card__name">
+                        <span class="lang-en">Assembly</span>
+                        <span class="lang-he">אסמבלר</span>
+                        <span class="lang-ar">لغة التجميع</span>
+                    </h3>
+                    <p class="stack-card__desc">
+                        <span class="lang-en">Direct CPU instruction coding, register manipulation, and interrupt service routines.</span>
+                        <span class="lang-he">כתיבת הוראות ישירות למעבד, מניפולציה של רגיסטרים ו-ISR.</span>
+                        <span class="lang-ar">كتابة الأوامر المباشرة للمعالج وإجراءات خدمة المقاطعة.</span>
+                    </p>
+                    <div class="stack-card__tags">
+                        <span>x86</span><span>ISR</span><span>Registers</span>
+                    </div>
+                </div>
+
+                <div class="stack-card glass-card reveal">
+                    <div class="stack-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+                    </div>
+                    <div class="stack-card__lang">VHDL</div>
+                    <h3 class="stack-card__name">
+                        <span class="lang-en">Hardware Description</span>
+                        <span class="lang-he">תיאור חומרה</span>
+                        <span class="lang-ar">وصف الأجهزة</span>
+                    </h3>
+                    <p class="stack-card__desc">
+                        <span class="lang-en">FPGA programming, digital logic design, and hardware synthesis using VHDL/AHDL.</span>
+                        <span class="lang-he">תכנות FPGA, עיצוב לוגיקה ספרתית וסינתזת חומרה.</span>
+                        <span class="lang-ar">برمجة FPGA وتصميم المنطق الرقمي والتوليف باستخدام VHDL.</span>
+                    </p>
+                    <div class="stack-card__tags">
+                        <span>FPGA</span><span>AHDL</span><span>Synthesis</span>
+                    </div>
+                </div>
+
+                <div class="stack-card glass-card reveal">
+                    <div class="stack-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <div class="stack-card__lang">SYS</div>
+                    <h3 class="stack-card__name">
+                        <span class="lang-en">System Architecture</span>
+                        <span class="lang-he">ארכיטקטורת מערכת</span>
+                        <span class="lang-ar">بنية النظام</span>
+                    </h3>
+                    <p class="stack-card__desc">
+                        <span class="lang-en">Microprocessor interfacing, bus protocols, memory maps, and interrupt-driven design.</span>
+                        <span class="lang-he">ממשק מיקרומעבד, פרוטוקולי BUS, מפות זיכרון ועיצוב מיקרו-מחשבים.</span>
+                        <span class="lang-ar">واجهة المعالج الدقيق وبروتوكولات الناقل وخرائط الذاكرة.</span>
+                    </p>
+                    <div class="stack-card__tags">
+                        <span>I2C/SPI</span><span>UART</span><span>DMA</span>
+                    </div>
+                </div>
+
+                <div class="stack-card glass-card reveal">
+                    <div class="stack-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M20 12h2M2 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"/></svg>
+                    </div>
+                    <div class="stack-card__lang">SIM</div>
+                    <h3 class="stack-card__name">
+                        <span class="lang-en">Simulation & Testing</span>
+                        <span class="lang-he">סימולציה ובדיקות</span>
+                        <span class="lang-ar">المحاكاة والاختبار</span>
+                    </h3>
+                    <p class="stack-card__desc">
+                        <span class="lang-en">Analog circuit simulation with SPICE, digital logic verification, and hardware QA.</span>
+                        <span class="lang-he">סימולציית מעגלים אנלוגיים עם SPICE, אימות לוגיקה ובטחת איכות.</span>
+                        <span class="lang-ar">محاكاة الدوائر التناظرية باستخدام SPICE والتحقق من المنطق.</span>
+                    </p>
+                    <div class="stack-card__tags">
+                        <span>SPICE</span><span>Oscilloscope</span><span>QA</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════ EDUCATION ═══════════════════════ -->
+        <section id="education" class="edu-section">
+            <div class="section-header reveal">
+                <p class="section-label">
+                    <span class="lang-en">// Academic Path</span>
+                    <span class="lang-he">// מסלול אקדמי</span>
+                    <span class="lang-ar">// المسار الأكاديمي</span>
+                </p>
+                <h2>
+                    <span class="lang-en">Education &amp; <span class="gradient-text">Curriculum</span></span>
+                    <span class="lang-he">השכלה ו<span class="gradient-text">תוכנית לימודים</span></span>
+                    <span class="lang-ar">التعليم و<span class="gradient-text">المناهج</span></span>
+                </h2>
+                <p class="section-sub">
+                    <span class="lang-en">Currently in Year 1 at the National School for Practical Engineers — Technion, Haifa.</span>
+                    <span class="lang-he">שנה א׳ בבית הספר הארצי להנדסאים בקריית הטכניון, חיפה.</span>
+                    <span class="lang-ar">حالياً في السنة الأولى في المدرسة الوطنية للمهندسين العمليين — التخنيون، حيفا.</span>
                 </p>
             </div>
 
             <div class="timeline">
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="glass-card timeline-content">
-                        <h3>⚡ <span class="lang-en">Core Engineering Foundations</span><span class="lang-he">יסודות
-                                הנדסה ומדעים</span><span class="lang-ar">مبادئ الهندسة الأساسية</span></h3>
-                        <p><span class="lang-en">Building a robust theoretical base.</span><span class="lang-he">בניית
-                                בסיס תיאורטי חזק.</span><span class="lang-ar">بناء قاعدة نظرية متينة.</span></p>
-                        <ul class="course-list">
-                            <li><span class="lang-en">Mathematics & Physics</span><span class="lang-he">מתמטיקה
-                                    ופיזיקה</span><span class="lang-ar">الرياضيات والفيزياء</span></li>
-                            <li><span class="lang-en">Electrical Networks</span><span class="lang-he">תורת
-                                    החשמל</span><span class="lang-ar">الشبكات الكهربائية</span></li>
-                            <li><span class="lang-en">Principles of Analog & Digital Electronics</span><span
-                                    class="lang-he">עקרונות אלקטרוניקה ספרתית ותקבילית</span><span class="lang-ar">مبادئ
-                                    الإلكترونيات التناظرية والرقمية</span></li>
-                        </ul>
-                    </div>
-                </div>
 
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="glass-card timeline-content">
-                        <h3>💻 <span class="lang-en">Software & Programming</span><span class="lang-he">תוכנה
-                                ותכנות</span><span class="lang-ar">البرمجيات والبرمجة</span></h3>
-                        <p><span class="lang-en">Mastering languages to manage and control complex hardware.</span><span
-                                class="lang-he">שליטה בשפות למטרת ניהול ובקרת חומרה מורכבת.</span><span
-                                class="lang-ar">إتقان اللغات لإدارة الأجهزة المعقدة والتحكم فيها.</span></p>
-                        <ul class="course-list">
-                            <li><span class="lang-en">Intro to Computer Science</span><span class="lang-he">מבוא למדעי
-                                    המחשב</span><span class="lang-ar">مقدمة في علوم الكمبيوتر</span></li>
-                            <li><span class="lang-en">C / C++ Programming</span><span class="lang-he">תכנות שפות C /
-                                    C++</span><span class="lang-ar">برمجة C / C++</span></li>
-                            <li><span class="lang-en">Advanced Programming & Assembler</span><span class="lang-he">תכנות
-                                    מתקדם ואסמבלר</span><span class="lang-ar">البرمجة المتقدمة والمجمع
-                                    (Assembler)</span></li>
-                        </ul>
+                <div class="timeline-item reveal timeline-item--active">
+                    <div class="timeline-dot">
+                        <span class="timeline-dot__inner"></span>
                     </div>
-                </div>
-
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="glass-card timeline-content">
-                        <h3>🛠️ <span class="lang-en">Modern Hardware & Labs</span><span class="lang-he">חומרה מודרנית
-                                ומעבדות</span><span class="lang-ar">الأجهزة الحديثة والمختبرات</span></h3>
-                        <p><span class="lang-en">Hands-on design using sophisticated industry tools.</span><span
-                                class="lang-he">תכנון מעשי בשימוש כלי תעשייה מתקדמים.</span><span
-                                class="lang-ar">التصميم العملي باستخدام أدوات الصناعة المتطورة.</span></p>
-                        <ul class="course-list">
-                            <li><span class="lang-en">Hardware Description Languages (VHDL/AHDL)</span><span
-                                    class="lang-he">שפות תיאור חומרה (VHDL/AHDL)</span><span class="lang-ar">لغات وصف
-                                    الأجهزة (VHDL/AHDL)</span></li>
-                            <li><span class="lang-en">Analog Simulation (SPICE)</span><span class="lang-he">סימולציה
-                                    אנלוגית (SPICE)</span><span class="lang-ar">المحاكاة التناظرية (SPICE)</span></li>
-                            <li><span class="lang-en">Microcomputers & Microprocessors</span><span
-                                    class="lang-he">מיקרו-מחשבים ומיקרו-מעבדים</span><span class="lang-ar">الحواسيب
-                                    الدقيقة والمعالجات الدقيقة</span></li>
-                            <li><span class="lang-en">Digital Systems Labs (View Logic)</span><span
-                                    class="lang-he">מעבדות מערכות ספרתיות</span><span class="lang-ar">مختبرات الأنظمة
-                                    الرقمية</span></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item reveal">
-                    <div class="timeline-dot"></div>
-                    <div class="glass-card timeline-content">
-                        <h3>🎓 <span class="lang-en">State Final Project</span><span class="lang-he">פרויקט ממלכתי
-                                (גמר)</span><span class="lang-ar">المشروع النهائي</span></h3>
-                        <p><span class="lang-en">Integrating everything into a complete, industry-grade
-                                system.</span><span class="lang-he">שילוב כלל האמצעים לכדי מערכת שלמה ברמה
-                                תעשייתית.</span><span class="lang-ar">دمج كل شيء في نظام كامل على مستوى الصناعة.</span>
+                    <div class="timeline-content glass-card timeline-content--active">
+                        <div class="timeline-content__header">
+                            <span class="timeline-tag timeline-tag--current">CURRENT — YEAR 1</span>
+                            <h3>
+                                <span class="lang-en">Core Engineering Foundations</span>
+                                <span class="lang-he">יסודות הנדסה ומדעים</span>
+                                <span class="lang-ar">مبادئ الهندسة الأساسية</span>
+                            </h3>
+                        </div>
+                        <p>
+                            <span class="lang-en">Building a robust theoretical base in physics, mathematics, and fundamental electronics.</span>
+                            <span class="lang-he">בניית בסיס תיאורטי חזק בפיזיקה, מתמטיקה ואלקטרוניקה.</span>
+                            <span class="lang-ar">بناء قاعدة نظرية متينة في الفيزياء والرياضيات والإلكترونيات الأساسية.</span>
                         </p>
                         <ul class="course-list">
-                            <li><span class="lang-en">System Definition & Requirements</span><span class="lang-he">הגדרת
-                                    מערכת ודרישות</span><span class="lang-ar">تعريف النظام والمتطلبات</span></li>
-                            <li><span class="lang-en">Electrical & Mechanical Construction</span><span
-                                    class="lang-he">מבנה חשמלי ומכני</span><span class="lang-ar">البناء الكهربائي
-                                    والميكانيكي</span></li>
-                            <li><span class="lang-en">Complete Hardware & Software Implementation</span><span
-                                    class="lang-he">יישום מלא של חומרה ותוכנה בבניית תכן</span><span
-                                    class="lang-ar">التنفيذ الشامل للأجهزة والبرمجيات</span></li>
+                            <li><span class="lang-en">Mathematics &amp; Physics</span><span class="lang-he">מתמטיקה ופיזיקה</span><span class="lang-ar">الرياضيات والفيزياء</span></li>
+                            <li><span class="lang-en">Electrical Networks</span><span class="lang-he">תורת החשמל</span><span class="lang-ar">الشبكات الكهربائية</span></li>
+                            <li><span class="lang-en">Analog &amp; Digital Electronics Principles</span><span class="lang-he">עקרונות אלקטרוניקה אנלוגית וספרתית</span><span class="lang-ar">مبادئ الإلكترونيات التناظرية والرقمية</span></li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section id="skills" class="about">
-            <div class="section-header glass-header reveal">
-                <h2><span class="lang-en">Technical</span><span class="lang-he">תחומי</span><span
-                        class="lang-ar">التركيز</span> <span class="gradient-text"><span class="lang-en">Focus
-                            Areas</span><span class="lang-he">התמחות טכנית</span><span
-                            class="lang-ar">التقني</span></span></h2>
-                <p><span class="lang-en">Technologies, languages, and methodologies I am mastering.</span><span
-                        class="lang-he">טכנולוגיות, שפות ומתודולוגיות שאני לומד ומיישם.</span><span
-                        class="lang-ar">التقنيات واللغات والمنهجيات التي أتقنها.</span></p>
-            </div>
-            <div class="glass-card skills-container">
-                <div class="skills-category-wrapper">
-                    <div class="skill-category reveal">
-                        <h4><span class="icon">🔌</span> <span class="lang-en">Hardware & Circuits</span><span
-                                class="lang-he">חומרה ומעגלים</span><span class="lang-ar">الأجهزة والدوائر</span></h4>
-                        <div class="skills-grid">
-                            <span class="skill-tag"
-                                data-en-tooltip="Designing and analyzing electronic components and systems."
-                                data-he-tooltip="תכנון וניתוח רכיבים ומערכות אלקטרוניות."
-                                data-ar-tooltip="تصميم وتحليل المكونات والأنظمة الإلكترونية."><span
-                                    class="lang-en">Circuit Design</span><span class="lang-he">תכנון מעגלים</span><span
-                                    class="lang-ar">تصميم الدوائر</span></span>
-                            <span class="skill-tag"
-                                data-en-tooltip="Creating the physical board layout for electronic circuits."
-                                data-he-tooltip="יצירת ממשק לוח פיזי עבור מעגלים אלקטרוניים (PCB)."
-                                data-ar-tooltip="إنشاء تخطيط اللوحة الفعلي للدوائر الإلكترونية."><span
-                                    class="lang-en">PCB Layout</span><span class="lang-he">עריכת מעגלים
-                                    (PCB)</span><span class="lang-ar">تصميم اللوحة (PCB)</span></span>
-                            <span class="skill-tag" data-en-tooltip="Programming and interfacing with integrated CPUs."
-                                data-he-tooltip="תכנות וממשק עם מעבדים משולבים."
-                                data-ar-tooltip="البرمجة والتفاعل مع المعالجات المدمجة."><span
-                                    class="lang-en">Microprocessors</span><span class="lang-he">מיקרו-מעבדים</span><span
-                                    class="lang-ar">المعالجات الدقيقة</span></span>
-                            <span class="skill-tag" data-en-tooltip="Precision component mounting and assembly."
-                                data-he-tooltip="הרכבת רכיבים עדינה בדיוק רב."
-                                data-ar-tooltip="تركيب وتجميع المكونات بدقة عالية."><span
-                                    class="lang-en">Soldering</span><span class="lang-he">הלחמה</span><span
-                                    class="lang-ar">اللحام</span></span>
-                            <span class="skill-tag"
-                                data-en-tooltip="Understanding core principles of electricity and boolean logic."
-                                data-he-tooltip="הבנת עקרונות חשמל ולוגיקה בוליאנית."
-                                data-ar-tooltip="فهم المبادئ الأساسية للكهرباء والمنطق البولياني."><span
-                                    class="lang-en">Digital/Analog Logic</span><span class="lang-he">לוגיקה
-                                    בוליאנית</span><span class="lang-ar">المنطق الرقمي/التناظري</span></span>
-                            <span class="skill-tag"
-                                data-en-tooltip="Interfacing with real-world inputs and physical outputs."
-                                data-he-tooltip="ממשק גמיש עם חיישנים לעולם האמיתי ויציאות פיזיות."
-                                data-ar-tooltip="التفاعل مع مدخلات الوقت الفعلي والمخرجات الفيزيائية."><span
-                                    class="lang-en">Sensors & Timers</span><span class="lang-he">חיישנים
-                                    וטיימרים</span><span class="lang-ar">الحساسات والمؤقتات</span></span>
-                        </div>
+                <div class="timeline-item reveal timeline-item--upcoming">
+                    <div class="timeline-dot timeline-dot--upcoming">
+                        <span class="timeline-dot__inner"></span>
                     </div>
-
-                    <div class="skill-category reveal">
-                        <h4><span class="icon">⌨️</span> <span class="lang-en">Software & Firmware</span><span
-                                class="lang-he">תוכנה וקושחה</span><span class="lang-ar">البرمجيات والأنظمة
-                                الثابتة</span></h4>
-                        <div class="skills-grid">
-                            <span class="skill-tag"
-                                data-en-tooltip="Low-level memory management and robust systems programming."
-                                data-he-tooltip="ניהול זיכרון ברמה נמוכה ותכנות מערכות יציבות."
-                                data-ar-tooltip="إدارة الذاكرة بمستوى منخفض وبرمجة الأنظمة المستقرة."><span
-                                    class="lang-en">C / C++</span><span class="lang-he">C / C++</span><span
-                                    class="lang-ar">C / C++</span></span>
-                            <span class="skill-tag"
-                                data-en-tooltip="Direct hardware-level instruction coding for maximum efficiency."
-                                data-he-tooltip="כתיבת הוראות ישירות למעבד ליעילות מרבית."
-                                data-ar-tooltip="كتابة الأوامر المباشرة للمستوى المادي بأقصى كفاءة."><span
-                                    class="lang-en">Assembler</span><span class="lang-he">אסמבלר</span><span
-                                    class="lang-ar">أسمبلي</span></span>
-                            <span class="skill-tag" data-en-tooltip="Programming programmable logic devices (FPGAs)."
-                                data-he-tooltip="תכנות התקני לוגיקה מתוכנתים (FPGA)."
-                                data-ar-tooltip="برمجة أجهزة المنطق القابلة للبرمجة (FPGA)."><span
-                                    class="lang-en">Hardware Desc. (VHDL)</span><span class="lang-he">שפות תיאור חומרה
-                                    VHDL</span><span class="lang-ar">لغات وصف الأجهزة</span></span>
-                            <span class="skill-tag" data-en-tooltip="Prototyping automated logic and systems rapidly."
-                                data-he-tooltip="יצירת אבי-טיפוס של מערכות חומרה במהירות."
-                                data-ar-tooltip="إنشاء نماذج أولية لأنظمة المنطق بسرعة."><span class="lang-en">Arduino
-                                    Programming</span><span class="lang-he">תכנות ארדואינו</span><span
-                                    class="lang-ar">برمجة اردوينو</span></span>
+                    <div class="timeline-content glass-card timeline-content--upcoming">
+                        <div class="timeline-content__header">
+                            <span class="timeline-tag timeline-tag--upcoming">UPCOMING — YEAR 2</span>
+                            <h3>
+                                <span class="lang-en">Software &amp; Firmware Engineering</span>
+                                <span class="lang-he">תוכנה והנדסת קושחה</span>
+                                <span class="lang-ar">هندسة البرمجيات والأنظمة الثابتة</span>
+                            </h3>
                         </div>
-                    </div>
-
-                    <div class="skill-category reveal">
-                        <h4><span class="icon">🔬</span> <span class="lang-en">Tools & Simulation</span><span
-                                class="lang-he">כלים וסימולציה</span><span class="lang-ar">الأدوات والمحاكاة</span></h4>
-                        <div class="skills-grid">
-                            <span class="skill-tag"
-                                data-en-tooltip="Software for testing and verifying analog circuit behavior."
-                                data-he-tooltip="תוכנה לניתוח ווידוא של התנהגות מעגלים אנלוגיים."
-                                data-ar-tooltip="برامج لاختبار وتأكيد سلوك الدوائر التناظرية."><span
-                                    class="lang-en">SPICE Simulation</span><span class="lang-he">סימולציית
-                                    SPICE</span><span class="lang-ar">محاكاة SPICE</span></span>
-                            <span class="skill-tag"
-                                data-en-tooltip="Designing structural logic workflows and digital diagrams."
-                                data-he-tooltip="תכנון תהליכי לוגיקה ודיאגרמות ספרתיות."
-                                data-ar-tooltip="تصميم تدفقات المنطق الهيكلي والمخططات الرقمية."><span
-                                    class="lang-en">View Logic</span><span class="lang-he">View Logic</span><span
-                                    class="lang-ar">فيو لوجيك</span></span>
-                            <span class="skill-tag" data-en-tooltip="Drafting schematics and visual layouts."
-                                data-he-tooltip="שרטוט סכמות ופריסות חזותיות."
-                                data-ar-tooltip="رسم المخططات والتخطيطات المرئية."><span class="lang-en">CAD /
-                                    Prototyping</span><span class="lang-he">שרטוט CAD / אב-טיפוס</span><span
-                                    class="lang-ar">التصميم بمساعدة الكمبيوتر CAD</span></span>
-                            <span class="skill-tag"
-                                data-en-tooltip="Ensuring hardware reliability using multimeters, oscilloscopes, etc."
-                                data-he-tooltip="הבטחת אמינות חומרה באמצעות מולטימטרים, אוסצילוסקופים ועוד."
-                                data-ar-tooltip="ضمان موثوقية الأجهزة باستخدام أجهزة القياس المتعددة ومقاييس الذبذبات وغيرها."><span
-                                    class="lang-en">Testing & QA</span><span class="lang-he">בדיקות הבטחת
-                                    איכות</span><span class="lang-ar">اختبار وضمان الجودة</span></span>
-                        </div>
+                        <p>
+                            <span class="lang-en">Mastering systems-level languages to control and manage complex hardware.</span>
+                            <span class="lang-he">שליטה בשפות ברמת מערכת לבקרה וניהול של חומרה מורכבת.</span>
+                            <span class="lang-ar">إتقان لغات مستوى الأنظمة للتحكم في الأجهزة المعقدة وإدارتها.</span>
+                        </p>
+                        <ul class="course-list">
+                            <li><span class="lang-en">C / C++ Programming</span><span class="lang-he">תכנות C / C++</span><span class="lang-ar">برمجة C / C++</span></li>
+                            <li><span class="lang-en">Advanced Programming &amp; Assembler</span><span class="lang-he">תכנות מתקדם ואסמבלר</span><span class="lang-ar">البرمجة المتقدمة والمجمع</span></li>
+                            <li><span class="lang-en">Intro to Computer Science</span><span class="lang-he">מבוא למדעי המחשב</span><span class="lang-ar">مقدمة في علوم الكمبيوتر</span></li>
+                        </ul>
                     </div>
                 </div>
+
+                <div class="timeline-item reveal timeline-item--upcoming">
+                    <div class="timeline-dot timeline-dot--upcoming">
+                        <span class="timeline-dot__inner"></span>
+                    </div>
+                    <div class="timeline-content glass-card timeline-content--upcoming">
+                        <div class="timeline-content__header">
+                            <span class="timeline-tag timeline-tag--upcoming">UPCOMING — YEAR 3</span>
+                            <h3>
+                                <span class="lang-en">Microcomputers &amp; Digital Systems</span>
+                                <span class="lang-he">מיקרו-מחשבים ומערכות ספרתיות</span>
+                                <span class="lang-ar">الحواسيب الدقيقة والأنظمة الرقمية</span>
+                            </h3>
+                        </div>
+                        <p>
+                            <span class="lang-en">Hands-on design using sophisticated industry tools including FPGA and SPICE simulation.</span>
+                            <span class="lang-he">תכנון מעשי בשימוש כלי תעשייה מתקדמים כולל FPGA וסימולציית SPICE.</span>
+                            <span class="lang-ar">التصميم العملي باستخدام أدوات الصناعة المتطورة بما فيها FPGA ومحاكاة SPICE.</span>
+                        </p>
+                        <ul class="course-list">
+                            <li><span class="lang-en">Microcomputers &amp; Microprocessors</span><span class="lang-he">מיקרו-מחשבים ומיקרו-מעבדים</span><span class="lang-ar">الحواسيب الدقيقة والمعالجات الدقيقة</span></li>
+                            <li><span class="lang-en">Hardware Description Languages (VHDL/AHDL)</span><span class="lang-he">שפות תיאור חומרה (VHDL/AHDL)</span><span class="lang-ar">لغات وصف الأجهزة (VHDL/AHDL)</span></li>
+                            <li><span class="lang-en">Digital Systems Labs (View Logic)</span><span class="lang-he">מעבדות מערכות ספרתיות</span><span class="lang-ar">مختبرات الأنظمة الرقمية</span></li>
+                            <li><span class="lang-en">Analog Simulation (SPICE)</span><span class="lang-he">סימולציה אנלוגית (SPICE)</span><span class="lang-ar">المحاكاة التناظرية (SPICE)</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal timeline-item--upcoming">
+                    <div class="timeline-dot timeline-dot--upcoming">
+                        <span class="timeline-dot__inner"></span>
+                    </div>
+                    <div class="timeline-content glass-card timeline-content--upcoming">
+                        <div class="timeline-content__header">
+                            <span class="timeline-tag timeline-tag--upcoming">UPCOMING — FINAL</span>
+                            <h3>
+                                <span class="lang-en">State Final Project</span>
+                                <span class="lang-he">פרויקט ממלכתי (גמר)</span>
+                                <span class="lang-ar">المشروع الوطني النهائي</span>
+                            </h3>
+                        </div>
+                        <p>
+                            <span class="lang-en">Integrating all disciplines into a complete, industry-grade embedded system.</span>
+                            <span class="lang-he">שילוב כל התחומים לכדי מערכת משובצת שלמה ברמה תעשייתית.</span>
+                            <span class="lang-ar">دمج جميع التخصصات في نظام مدمج كامل على مستوى الصناعة.</span>
+                        </p>
+                        <ul class="course-list">
+                            <li><span class="lang-en">System Definition &amp; Requirements</span><span class="lang-he">הגדרת מערכת ודרישות</span><span class="lang-ar">تعريف النظام والمتطلبات</span></li>
+                            <li><span class="lang-en">Complete Hardware &amp; Software Co-Design</span><span class="lang-he">עיצוב משותף של חומרה ותוכנה</span><span class="lang-ar">التصميم المشترك للأجهزة والبرمجيات</span></li>
+                            <li><span class="lang-en">Electrical &amp; Mechanical Construction</span><span class="lang-he">מבנה חשמלי ומכני</span><span class="lang-ar">البناء الكهربائي والميكانيكي</span></li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <section id="contact" class="contact">
-            <div class="section-header glass-header reveal">
-                <h2><span class="lang-en">Let's</span><span class="lang-he">בואו </span><span class="lang-ar">لنبقى
-                    </span> <span class="gradient-text"><span class="lang-en">Connect</span><span
-                            class="lang-he">נתחבר</span><span class="lang-ar">على تواصل</span></span></h2>
-                <p>
-                    <span class="lang-en">Always open to discussing electronics, hardware, and opportunities.</span>
-                    <span class="lang-he">תמיד פתוח לשיחות על אלקטרוניקה, חומרה והזדמנויות.</span>
-                    <span class="lang-ar">مستعد دائماً لمناقشة الإلكترونيات والأجهزة والفرص المهنية.</span>
+
+
+        <!-- ═══════════════════════ CONTACT ═══════════════════════ -->
+        <section id="contact" class="contact-section">
+            <div class="section-header reveal">
+                <p class="section-label">
+                    <span class="lang-en">// Open Channel</span>
+                    <span class="lang-he">// ערוץ פתוח</span>
+                    <span class="lang-ar">// قناة مفتوحة</span>
+                </p>
+                <h2>
+                    <span class="lang-en">Let's <span class="gradient-text">Connect</span></span>
+                    <span class="lang-he">בואו <span class="gradient-text">נתחבר</span></span>
+                    <span class="lang-ar">لنبقى <span class="gradient-text">على تواصل</span></span>
+                </h2>
+                <p class="section-sub">
+                    <span class="lang-en">Always open to discussing electronics, firmware, and new opportunities.</span>
+                    <span class="lang-he">תמיד פתוח לשיחות על אלקטרוניקה, קושחה והזדמנויות חדשות.</span>
+                    <span class="lang-ar">مستعد دائماً لمناقشة الإلكترونيات والبرامج الثابتة والفرص الجديدة.</span>
                 </p>
             </div>
-            <div class="glass-card contact-container reveal">
-                <div class="social-links">
-                    <a href="mailto:tareq.cr07@gmail.com" target="_blank" class="social-btn">
-                        <span class="icon">✉️</span>
-                        <div class="social-details">
-                            <span class="social-name"><span class="lang-en">Email</span><span
-                                    class="lang-he">אימייל</span><span class="lang-ar">البريد الإلكتروني</span></span>
-                            <span class="social-val">tareq.cr07@gmail.com</span>
+
+            <div class="contact-layout">
+
+                <!-- Social Links -->
+                <div class="contact-links reveal">
+                    <a href="mailto:tareq.cr07@gmail.com" target="_blank" class="contact-link glass-card" id="link-email">
+                        <div class="contact-link__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         </div>
-                    </a>
-                    <a href="https://www.linkedin.com/in/tareq-suliman/" target="_blank" class="social-btn">
-                        <span class="icon">💼</span>
-                        <div class="social-details">
-                            <span class="social-name">LinkedIn</span>
-                            <span class="social-val">@tareq-suliman</span>
+                        <div>
+                            <span class="contact-link__name"><span class="lang-en">Email</span><span class="lang-he">אימייל</span><span class="lang-ar">البريد الإلكتروني</span></span>
+                            <span class="contact-link__val">tareq.cr07@gmail.com</span>
                         </div>
+                        <span class="contact-link__arrow">→</span>
                     </a>
-                    <a href="https://github.com/zDR34M" target="_blank" class="social-btn">
-                        <span class="icon">⌨️</span>
-                        <div class="social-details">
-                            <span class="social-name">GitHub</span>
-                            <span class="social-val">@zDR34M</span>
+                    <a href="https://www.linkedin.com/in/tareq-suliman/" target="_blank" class="contact-link glass-card" id="link-linkedin">
+                        <div class="contact-link__icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                         </div>
+                        <div>
+                            <span class="contact-link__name">LinkedIn</span>
+                            <span class="contact-link__val">@tareq-suliman</span>
+                        </div>
+                        <span class="contact-link__arrow">→</span>
                     </a>
+                    <a href="https://github.com/zDR34M" target="_blank" class="contact-link glass-card" id="link-github">
+                        <div class="contact-link__icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                        </div>
+                        <div>
+                            <span class="contact-link__name">GitHub</span>
+                            <span class="contact-link__val">@zDR34M</span>
+                        </div>
+                        <span class="contact-link__arrow">→</span>
+                    </a>
+
+                    <div class="status-badge" style="margin-top: 1rem;">
+                        <span class="status-pulse"></span>
+                        <span class="lang-en">Open to Internship &amp; Opportunities</span>
+                        <span class="lang-he">פתוח לסטאז' והזדמנויות</span>
+                        <span class="lang-ar">متاح للتدريب والفرص المهنية</span>
+                    </div>
                 </div>
-                <!-- Availability Status Badge -->
-                <div class="status-badge" style="margin: 1.5rem auto 0; display: flex; width: fit-content;">
-                    <span class="status-pulse"></span>
-                    <span class="lang-en">Open to Internship & Opportunities</span>
-                    <span class="lang-he">פתוח לסטאז' והזדמנויות</span>
-                    <span class="lang-ar">متاح للتدريب والفرص المهنية</span>
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrap glass-card reveal" id="contact-form-card">
+                    <h3 class="contact-form__title">
+                        <span class="lang-en">Send a Message</span>
+                        <span class="lang-he">שלח הודעה</span>
+                        <span class="lang-ar">أرسل رسالة</span>
+                    </h3>
+                    <form class="contact-form" id="contactForm" onsubmit="return handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="cf-name">
+                                <span class="lang-en">Name</span><span class="lang-he">שם</span><span class="lang-ar">الاسم</span>
+                            </label>
+                            <input type="text" id="cf-name" name="name" required placeholder="John Doe" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-email">
+                                <span class="lang-en">Email</span><span class="lang-he">אימייל</span><span class="lang-ar">البريد الإلكتروني</span>
+                            </label>
+                            <input type="email" id="cf-email" name="email" required placeholder="john@example.com" autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-message">
+                                <span class="lang-en">Message</span><span class="lang-he">הודעה</span><span class="lang-ar">الرسالة</span>
+                            </label>
+                            <textarea id="cf-message" name="message" rows="4" required placeholder="Hey Tareq, let's talk about..."></textarea>
+                        </div>
+                        <button type="submit" class="cta-button cta-button--primary cta-button--full" id="submitBtn">
+                            <span class="lang-en">Transmit Message</span>
+                            <span class="lang-he">שלח הודעה</span>
+                            <span class="lang-ar">إرسال الرسالة</span>
+                        </button>
+                    </form>
+                    <div class="form-success" id="formSuccess" style="display:none;">
+                        <div class="form-success__icon">✓</div>
+                        <p><span class="lang-en">Message transmitted! I'll reply soon.</span><span class="lang-he">הודעה נשלחה! אחזור בקרוב.</span><span class="lang-ar">تم إرسال الرسالة! سأرد قريباً.</span></p>
+                    </div>
                 </div>
+
             </div>
         </section>
+
     </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>
+            <span class="lang-en">Engineered by <span class="gradient-text">Tareq Suliman</span> · Practical Electronics Engineer</span>
+            <span class="lang-he">מיוצר על ידי <span class="gradient-text">טארק סולימאן</span> · הנדסאי אלקטרוניקה</span>
+            <span class="lang-ar">مصمم بواسطة <span class="gradient-text">طارق سليمان</span> · مهندس إلكترونيات عملي</span>
+        </p>
+        <p class="site-footer__copy">
+            <span class="lang-en">Built with C, current, and curiosity.</span>
+            <span class="lang-he">בנוי עם C, זרם וסקרנות.</span>
+            <span class="lang-ar">بُني بـ C وتيار وفضول.</span>
+        </p>
+    </footer>
 
     <!-- 3D Scene Controls HUD -->
     <div id="scene-controls" class="glass-card">
-        <div class="control-header"><span class="lang-en">SYS_OVERRIDE</span><span class="lang-he">הגדרות
-                מתקדמות</span><span class="lang-ar">إعدادات متقدمة</span></div>
-        <button id="btn-spin" class="control-btn"><span class="lang-en">Toggle Motor</span><span
-                class="lang-he">הפעל/כבה מנוע 3D</span><span class="lang-ar">تشغيل/إيقاف المحرك 3D</span></button>
-        <button id="btn-led" class="control-btn"><span class="lang-en">Cycle LED</span><span class="lang-he">שנה צבע
-                נורה (LED)</span><span class="lang-ar">تغيير لون الإضاءة LED</span></button>
-        <button id="btn-traces" class="control-btn"><span class="lang-en">Toggle Traces</span><span
-                class="lang-he">הצג/הסתר רשת הולכה</span><span class="lang-ar">إظهار/إخفاء شبكة التوصيل</span></button>
-    </div>
-
-    <!-- Language Control Floating Panel -->
-    <div id="langControlPanel" class="glass-card lang-panel">
-        <button id="langToggle" class="lang-toggle-btn" aria-label="Toggle Language" title="Change Language">
-            <span class="icon">🌐</span>
-            <span class="lang-en">English</span>
-            <span class="lang-he">עברית</span>
-            <span class="lang-ar">العربية</span>
+        <div class="control-header">SYS_OVERRIDE</div>
+        <button id="btn-spin" class="control-btn">
+            <span class="lang-en">Toggle Motor</span>
+            <span class="lang-he">הפעל/כבה מנוע 3D</span>
+            <span class="lang-ar">تشغيل/إيقاف المحرك</span>
+        </button>
+        <button id="btn-led" class="control-btn">
+            <span class="lang-en">Cycle LED</span>
+            <span class="lang-he">שנה צבע נורה LED</span>
+            <span class="lang-ar">تغيير لون LED</span>
+        </button>
+        <button id="btn-traces" class="control-btn">
+            <span class="lang-en">Toggle Traces</span>
+            <span class="lang-he">הצג/הסתר רשת הולכה</span>
+            <span class="lang-ar">إظهار/إخفاء التوصيلات</span>
         </button>
     </div>
 
-    <!-- Back to Top Button -->
+    <!-- Language Panel -->
+    <div id="langControlPanel" class="glass-card lang-panel">
+        <button id="langToggle" class="lang-toggle-btn" aria-label="Toggle Language" title="Change Language">
+            <span class="icon">🌐</span>
+            <span class="lang-en">EN</span>
+            <span class="lang-he">HE</span>
+            <span class="lang-ar">AR</span>
+        </button>
+    </div>
+
+    <!-- Back to Top -->
     <button id="backToTop" aria-label="Back to top" title="Back to top">&#8679;</button>
 
     <script type="module" src="script.js"></script>
+
+    <script>
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        const form = document.getElementById('contactForm');
+        const success = document.getElementById('formSuccess');
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.style.opacity = '0.6';
+        setTimeout(() => {
+            form.style.display = 'none';
+            success.style.display = 'flex';
+        }, 600);
+        return false;
+    }
+    </script>
 </body>
 
 </html>

@@ -1,243 +1,209 @@
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { createNoise3D } from 'https://unpkg.com/simplex-noise@4.0.1/dist/esm/simplex-noise.js';
 
-// Setup
-const container = document.getElementById('canvas-container');
-const scene = new THREE.Scene();
-// Deep space fog
-scene.fog = new THREE.FogExp2(0x000000, 0.03);
+/* ═══════════════════════════════════════════════════════════
+   THREE.JS — 3D CIRCUIT BOARD BACKGROUND
+═══════════════════════════════════════════════════════════ */
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 4;
+const container = document.getElementById('canvas-container');
+const scene     = new THREE.Scene();
+scene.fog       = new THREE.FogExp2(0x000000, 0.025);
+
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 4.5;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping       = THREE.ACESFilmicToneMapping;
+renderer.outputColorSpace  = THREE.SRGBColorSpace;
 container.appendChild(renderer.domElement);
 
-// Lighting - Matches Website Theme (Cyan/Blue)
-const ambientLight = new THREE.AmbientLight(0x111111, 2);
-scene.add(ambientLight);
+/* — Lighting (Neon Cyan / Electric Blue palette) — */
+scene.add(new THREE.AmbientLight(0x111118, 2.5));
 
-const mainLight = new THREE.DirectionalLight(0xffffff, 1);
+const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
 mainLight.position.set(10, 10, 10);
 scene.add(mainLight);
 
-// Accent Color Light (Green)
-const accentLight = new THREE.PointLight(0x00ff88, 30, 50);
-accentLight.position.set(-5, 5, 5);
-scene.add(accentLight);
+const cyanLight = new THREE.PointLight(0x00d4ff, 35, 60);
+cyanLight.position.set(-5, 5, 5);
+scene.add(cyanLight);
 
-// Secondary Green Light
-const secondaryLight = new THREE.PointLight(0x00cc66, 30, 50);
-secondaryLight.position.set(5, -5, 5);
-scene.add(secondaryLight);
+const blueLight = new THREE.PointLight(0x0055ff, 25, 60);
+blueLight.position.set(5, -4, 4);
+scene.add(blueLight);
 
-// Deep Blue Fill
-const fillLight = new THREE.PointLight(0x0055ff, 20, 50);
-fillLight.position.set(0, 5, -5);
-scene.add(fillLight);
+const rimLight = new THREE.PointLight(0x004080, 15, 50);
+rimLight.position.set(0, 6, -5);
+scene.add(rimLight);
 
-// --- Electronic Circuit Board ---
+/* — Circuit Board Group — */
 const circuitGroup = new THREE.Group();
 
-// 1. PCB Base
-const pcbGeometry = new THREE.BoxGeometry(3.5, 0.05, 2.5);
-const pcbMaterial = new THREE.MeshStandardMaterial({
-    color: 0x003311, // Dark green PCB
-    roughness: 0.7,
-    metalness: 0.2
+// PCB Base
+const pcbGeo = new THREE.BoxGeometry(3.6, 0.05, 2.6);
+const pcbMat = new THREE.MeshStandardMaterial({
+    color: 0x002233, roughness: 0.65, metalness: 0.25
 });
-const pcb = new THREE.Mesh(pcbGeometry, pcbMaterial);
-circuitGroup.add(pcb);
+circuitGroup.add(new THREE.Mesh(pcbGeo, pcbMat));
 
-// 2. Main Microcontroller Chip
-const mcuGeometry = new THREE.BoxGeometry(1.2, 0.1, 1.2);
-const icMaterial = new THREE.MeshStandardMaterial({
-    color: 0x111111, // Dark grey/black
-    roughness: 0.6,
-    metalness: 0.4
-});
-const mcu = new THREE.Mesh(mcuGeometry, icMaterial);
-mcu.position.set(0, 0.075, 0); // slightly above PCB
+// MCU Chip
+const icMat = new THREE.MeshStandardMaterial({ color: 0x0d0d12, roughness: 0.55, metalness: 0.5 });
+const mcu   = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.1, 1.2), icMat);
+mcu.position.set(0, 0.075, 0);
 circuitGroup.add(mcu);
 
-// Add pins to MCU
-const pinMaterial = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.8, roughness: 0.2 });
-const pinGeo = new THREE.BoxGeometry(0.04, 0.15, 0.08);
+// MCU label (thin line marks on top)
+const markMat = new THREE.MeshStandardMaterial({ color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 0.4 });
+const markGeo = new THREE.BoxGeometry(0.8, 0.005, 0.04);
+for (let i = 0; i < 4; i++) {
+    const mark = new THREE.Mesh(markGeo, markMat);
+    mark.position.set(0, 0.13, -0.2 + i * 0.13);
+    circuitGroup.add(mark);
+}
+
+// MCU Pins
+const pinMat = new THREE.MeshStandardMaterial({ color: 0xb0b8c8, metalness: 0.85, roughness: 0.15 });
+const pinGeo = new THREE.BoxGeometry(0.035, 0.14, 0.07);
 for (let i = 0; i < 8; i++) {
     const offset = -0.525 + i * 0.15;
-    // Top
-    const pinT = new THREE.Mesh(pinGeo, pinMaterial);
-    pinT.position.set(offset, 0.05, -0.6);
-    circuitGroup.add(pinT);
-    // Bottom
-    const pinB = new THREE.Mesh(pinGeo, pinMaterial);
-    pinB.position.set(offset, 0.05, 0.6);
-    circuitGroup.add(pinB);
-    // Left
-    const pinL = new THREE.Mesh(pinGeo, pinMaterial);
-    pinL.rotation.y = Math.PI / 2;
-    pinL.position.set(-0.6, 0.05, offset);
-    circuitGroup.add(pinL);
-    // Right
-    const pinR = new THREE.Mesh(pinGeo, pinMaterial);
-    pinR.rotation.y = Math.PI / 2;
-    pinR.position.set(0.6, 0.05, offset);
-    circuitGroup.add(pinR);
+    [[-0.62, offset, 0], [0.62, offset, 0],
+     [offset, -0.62, Math.PI / 2], [offset, 0.62, Math.PI / 2]].forEach(([px, pz, ry]) => {
+        const p = new THREE.Mesh(pinGeo, pinMat);
+        if (ry) p.rotation.y = ry;
+        p.position.set(px, 0.05, pz);
+        circuitGroup.add(p);
+    });
 }
 
-// 3. Header Pins
-const headerHousingGeo = new THREE.BoxGeometry(0.2, 0.15, 1.5);
-const headerHousingMat = new THREE.MeshStandardMaterial({ color: 0x222222 });
-const header = new THREE.Mesh(headerHousingGeo, headerHousingMat);
-header.position.set(1.4, 0.1, 0);
+// Header connector
+const headerMat = new THREE.MeshStandardMaterial({ color: 0x1a1a22 });
+const header    = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.16, 1.5), headerMat);
+header.position.set(1.45, 0.1, 0);
 circuitGroup.add(header);
 
-const headerPinGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.3);
-const headerPinMat = new THREE.MeshStandardMaterial({ color: 0xffcc00, metalness: 1, roughness: 0.3 }); // Gold pins
+const hpinMat = new THREE.MeshStandardMaterial({ color: 0xffd700, metalness: 1, roughness: 0.25 });
 for (let i = 0; i < 10; i++) {
-    const pin = new THREE.Mesh(headerPinGeo, headerPinMat);
-    pin.position.set(1.4, 0.15, -0.675 + i * 0.15);
-    circuitGroup.add(pin);
+    const hp = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.32), hpinMat);
+    hp.position.set(1.45, 0.16, -0.675 + i * 0.15);
+    circuitGroup.add(hp);
 }
 
-// 4. Smaller ICs
-const smallIcGeo = new THREE.BoxGeometry(0.4, 0.08, 0.6);
-const smallIc1 = new THREE.Mesh(smallIcGeo, icMaterial);
-smallIc1.position.set(-1.2, 0.065, 0.5);
-circuitGroup.add(smallIc1);
+// Smaller ICs
+const smallGeo = new THREE.BoxGeometry(0.42, 0.08, 0.62);
+[-0.55, 0.55].forEach(z => {
+    const ic = new THREE.Mesh(smallGeo, icMat);
+    ic.position.set(-1.22, 0.065, z);
+    circuitGroup.add(ic);
+});
 
-const smallIc2 = new THREE.Mesh(smallIcGeo, icMaterial);
-smallIc2.position.set(-1.2, 0.065, -0.5);
-circuitGroup.add(smallIc2);
-
-// 5. Capacitors (Cylinders)
-const capGeo = new THREE.CylinderGeometry(0.1, 0.1, 0.3);
-const capMat = new THREE.MeshStandardMaterial({ color: 0x111166, roughness: 0.4, metalness: 0.6 }); // Dark blue caps
-const capTopMat = new THREE.MeshStandardMaterial({ color: 0xaaaaaa, metalness: 0.8 }); // Silver top
-
-const createCapacitor = (x, z) => {
-    const cap = new THREE.Group();
-    const body = new THREE.Mesh(capGeo, capMat);
+// Capacitors
+const capBodyMat = new THREE.MeshStandardMaterial({ color: 0x001133, roughness: 0.35, metalness: 0.7 });
+const capTopMat  = new THREE.MeshStandardMaterial({ color: 0xaabbcc, metalness: 0.9 });
+[[-0.5, 0.82], [-0.2, 0.82], [0.82, -0.82]].forEach(([x, z]) => {
+    const grp  = new THREE.Group();
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.3), capBodyMat);
     body.position.y = 0.15;
-    const top = new THREE.Mesh(new THREE.CylinderGeometry(0.101, 0.101, 0.05), capTopMat);
+    const top  = new THREE.Mesh(new THREE.CylinderGeometry(0.101, 0.101, 0.05), capTopMat);
     top.position.y = 0.28;
-    cap.add(body);
-    cap.add(top);
-    cap.position.set(x, 0.025, z);
-    circuitGroup.add(cap);
-};
+    grp.add(body, top);
+    grp.position.set(x, 0.025, z);
+    circuitGroup.add(grp);
+});
 
-createCapacitor(-0.5, 0.8);
-createCapacitor(-0.2, 0.8);
-createCapacitor(0.8, -0.8);
-
-// 6. Glowing LED
-const ledGeo = new THREE.BoxGeometry(0.1, 0.1, 0.1);
-const ledMat = new THREE.MeshStandardMaterial({ color: 0x00ff88, emissive: 0x00ff88, emissiveIntensity: 2 });
-const led = new THREE.Mesh(ledGeo, ledMat);
-led.position.set(0.8, 0.075, 0.8);
+// Glowing LED
+const ledMat  = new THREE.MeshStandardMaterial({
+    color: 0x00d4ff, emissive: 0x00d4ff, emissiveIntensity: 2.5
+});
+const led     = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 0.1), ledMat);
+led.position.set(0.82, 0.075, 0.82);
 circuitGroup.add(led);
-let pulseLed = led;
 
-// 7. Decorative Traces (Lines on the board)
-const traceMat = new THREE.LineBasicMaterial({ color: 0x00aa55 });
-const addTrace = (points) => {
-    const p3d = points.map(p => new THREE.Vector3(p[0], 0.03, p[1]));
-    const geo = new THREE.BufferGeometry().setFromPoints(p3d);
-    const trace = new THREE.Line(geo, traceMat);
-    circuitGroup.add(trace);
+// LED light source
+const ledPoint = new THREE.PointLight(0x00d4ff, 15, 4);
+ledPoint.position.set(0.82, 0.4, 0.82);
+circuitGroup.add(ledPoint);
+
+// Traces
+const traceMat = new THREE.LineBasicMaterial({ color: 0x0099cc, linewidth: 1 });
+const addTrace = (pts) => {
+    const geo   = new THREE.BufferGeometry().setFromPoints(
+        pts.map(([x, z]) => new THREE.Vector3(x, 0.03, z))
+    );
+    circuitGroup.add(new THREE.Line(geo, traceMat));
 };
-
 addTrace([[-1.2, 0.2], [-0.8, 0.2], [-0.6, 0]]);
-addTrace([[-1.2, 0.8], [-1.0, 0.8], [-0.6, 0.4], [-0.6, 0.2]]);
-addTrace([[0.6, 0.2], [0.8, 0.4], [1.2, 0.4]]);
-addTrace([[0.6, -0.2], [1.0, -0.2], [1.2, -0.4]]);
-addTrace([[-0.2, -0.6], [-0.2, -0.8], [-0.8, -0.8]]);
+addTrace([[-1.2, 0.82], [-1.0, 0.82], [-0.6, 0.4], [-0.6, 0.2]]);
+addTrace([[0.6, 0.2], [0.82, 0.4], [1.22, 0.4]]);
+addTrace([[0.6, -0.2], [1.0, -0.2], [1.22, -0.4]]);
+addTrace([[-0.2, -0.6], [-0.2, -0.82], [-0.82, -0.82]]);
+addTrace([[0, -0.6], [0.4, -0.6], [0.6, -0.4]]);
 
 scene.add(circuitGroup);
 
-// Background Particles
-const particlesGeometry = new THREE.BufferGeometry();
-const particlesCount = 1000;
-const posArray = new Float32Array(particlesCount * 3);
+/* — Background Particles — */
+const particleGeo = new THREE.BufferGeometry();
+const COUNT       = 1200;
+const posArr      = new Float32Array(COUNT * 3);
+for (let i = 0; i < COUNT * 3; i++) posArr[i] = (Math.random() - 0.5) * 24;
+particleGeo.setAttribute('position', new THREE.BufferAttribute(posArr, 3));
 
-for (let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 20;
-}
+const particleMesh = new THREE.Points(particleGeo, new THREE.PointsMaterial({
+    size: 0.018, color: 0x00aaff, transparent: true, opacity: 0.45,
+    blending: THREE.AdditiveBlending, depthWrite: false
+}));
+scene.add(particleMesh);
 
-particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.02,
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.5,
-    blending: THREE.AdditiveBlending
+/* — Noise & Mouse — */
+const noise3D         = createNoise3D();
+let   mouseX = 0, mouseY = 0;
+let   targetX = 0, targetY = 0;
+
+document.addEventListener('mousemove', e => {
+    mouseX = (e.clientX - window.innerWidth  / 2) * 0.001;
+    mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
 });
 
-const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particlesMesh);
+/* — Animation State — */
+const clock          = new THREE.Clock();
+let   cumulativeSpin = 0;
+window.sceneState    = { isSpinning: true, isTracesVisible: true, currentLedColorIdx: 0 };
 
-// Noise Setup
-const noise3D = createNoise3D();
-const noiseScale = 0.8;
-const noiseSpeed = 0.5;
-const displacementScale = 0.4;
-
-// Mouse Interaction
-let mouseX = 0;
-let mouseY = 0;
-let targetX = 0;
-let targetY = 0;
-
-const windowHalfX = window.innerWidth / 2;
-const windowHalfY = window.innerHeight / 2;
-
-document.addEventListener('mousemove', (event) => {
-    mouseX = (event.clientX - windowHalfX) * 0.001;
-    mouseY = (event.clientY - windowHalfY) * 0.001;
-});
-
-// Animation
-const clock = new THREE.Clock();
-let cumulativeSpin = 0;
-window.sceneState = { isSpinning: true, isTracesVisible: true, currentLedColorIdx: 0 };
+const ledColors = [0x00d4ff, 0xff4466, 0x00ff88, 0xffcc00, 0xaa44ff];
 
 function animate() {
     requestAnimationFrame(animate);
 
     const delta = clock.getDelta();
-    const time = clock.getElapsedTime();
+    const time  = clock.getElapsedTime();
 
-    // Rotation based on mouse
-    targetX = mouseX * 0.5;
-    targetY = mouseY * 0.5;
+    // Lerp mouse
+    targetX += (mouseX - targetX) * 0.06;
+    targetY += (mouseY - targetY) * 0.06;
 
-    // Continuous rotation + mouse offset
-    if (window.sceneState.isSpinning) {
-        cumulativeSpin += delta * 0.5;
-    }
-    circuitGroup.rotation.y = cumulativeSpin + targetX;
-    circuitGroup.rotation.x = 0.5 + targetY; // Base tilt of 0.5 rad
+    if (window.sceneState.isSpinning) cumulativeSpin += delta * 0.4;
+
+    circuitGroup.rotation.y = cumulativeSpin + targetX * 0.6;
+    circuitGroup.rotation.x = 0.45 + targetY * 0.5;
 
     // Pulse LED
-    if (typeof pulseLed !== 'undefined') {
-        pulseLed.material.emissiveIntensity = 1.5 + Math.sin(time * 5);
-    }
+    ledMat.emissiveIntensity  = 2 + Math.sin(time * 4) * 0.8;
+    ledPoint.intensity        = 12 + Math.sin(time * 4) * 5;
 
-    // Particles rotation
-    particlesMesh.rotation.y = -time * 0.05;
-    particlesMesh.rotation.x = time * 0.02;
+    // Animate cyan accent light
+    cyanLight.position.x = Math.sin(time * 0.3) * 6;
+    cyanLight.position.y = Math.cos(time * 0.2) * 4 + 3;
+
+    // Particles drift
+    particleMesh.rotation.y = -time * 0.04;
+    particleMesh.rotation.x =  time * 0.018;
 
     renderer.render(scene, camera);
 }
-
 animate();
 
-// Resize Handler
+/* — Resize — */
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -245,171 +211,239 @@ window.addEventListener('resize', () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-// Hamburger Menu Toggle
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
-
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-});
-
-// Close menu when clicking on a link
-navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-    });
-});
-
-// Flashlight Cursor Effect for Glass Cards
-document.querySelectorAll('.glass-card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-    });
-});
-
-// Boot Sequence Preloader & Hero Subtitle Typewriter
-document.addEventListener("DOMContentLoaded", () => {
-    const preloader = document.getElementById('preloader');
-    const termText = document.getElementById('terminal-text');
-
-    // --- Trilingual Language Toggle ---
-    const langToggle = document.getElementById('langToggle');
-    const languages = ['en', 'he', 'ar'];
-    let currentLangIdx = 0;
-
-    if (langToggle) {
-        langToggle.addEventListener('click', () => {
-            currentLangIdx = (currentLangIdx + 1) % languages.length;
-            const nextLang = languages[currentLangIdx];
-            document.body.classList.remove('lang-mode-en', 'lang-mode-he', 'lang-mode-ar', 'rtl-mode');
-            document.body.classList.add(`lang-mode-${nextLang}`);
-            if (nextLang === 'he' || nextLang === 'ar') {
-                document.body.classList.add('rtl-mode');
-            }
-        });
-    }
-
-    // 1. Boot Sequence Logic
-    const bootLines = [
-        "KERNEL LOADED...",
-        "INITIALIZING HARDWARE SYSTEMS... [OK]",
-        "COMPILING C++ FIRMWARE... [OK]",
-        "MOUNTING VIRTUAL FILESYSTEM... [OK]",
-        "ACTIVATING 3D ENVIRONMENT..."
-    ];
-
-    let lineIdx = 0;
-
-    function showNextBootLine() {
-        if (lineIdx < bootLines.length) {
-            const p = document.createElement('div');
-            p.innerText = "> " + bootLines[lineIdx];
-            termText.appendChild(p);
-            lineIdx++;
-            setTimeout(showNextBootLine, Math.random() * 350 + 100);
-        } else {
-            // Boot sequence done, fade out preloader
-            setTimeout(() => {
-                if (preloader) preloader.classList.add('fade-out');
-                // Show language panel after boot
-                const langPanel = document.getElementById('langControlPanel');
-                if (langPanel) langPanel.classList.add('visible');
-                // Trigger Hero typewriter slightly after fading out starts
-                setTimeout(startHeroTypewriter, 400);
-            }, 600);
-        }
-    }
-
-    // 2. Hero Subtitle Typewriter Logic
-    function startHeroTypewriter() {
-        const typewriter = document.querySelector('.hero .subtitle');
-        if (typewriter) {
-            const textToType = "Exploring the Future of Hardware & Systems"; // From HTML
-            typewriter.innerText = '';
-
-            let i = 0;
-            typewriter.innerHTML = '<span class="typewriter-cursor blink-cursor">_</span>';
-
-            function type() {
-                if (i < textToType.length) {
-                    typewriter.innerHTML = textToType.substring(0, i + 1) + '<span class="typewriter-cursor blink-cursor">_</span>';
-                    i++;
-                    const speed = Math.random() * (100 - 40) + 40;
-                    setTimeout(type, speed);
-                } else {
-                    typewriter.innerHTML = textToType + '<span class="typewriter-cursor blink-cursor">_</span>';
-                }
-            }
-            type();
-        }
-    }
-
-    // Kick off the boot sequence immediately
-    if (termText) {
-        setTimeout(showNextBootLine, 200);
-    } else { // fallback if preloader isn't found
-        startHeroTypewriter();
-    }
-});
-
-// -- Scroll Reveal Interactions --
-document.addEventListener("DOMContentLoaded", () => {
-    // Dynamically assign reveal class just in case to ensure coverage
-    document.querySelectorAll('.timeline-item, .skill-category, .section-header').forEach(el => el.classList.add('reveal'));
-
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { rootMargin: "0px 0px -50px 0px", threshold: 0.1 });
-
-    revealElements.forEach(el => revealObserver.observe(el));
-});
-
-// -- 3D HUD Controls --
-const ledColors = [0x00ff88, 0xff0055, 0x00aaff, 0xffdd00];
-
+/* ═══════════════════════════════════════════════════════════
+   HUD CONTROLS
+═══════════════════════════════════════════════════════════ */
 document.getElementById('btn-spin')?.addEventListener('click', () => {
     window.sceneState.isSpinning = !window.sceneState.isSpinning;
 });
 
 document.getElementById('btn-led')?.addEventListener('click', () => {
-    window.sceneState.currentLedColorIdx = (window.sceneState.currentLedColorIdx + 1) % ledColors.length;
-    const newColor = ledColors[window.sceneState.currentLedColorIdx];
-    if (typeof ledMat !== 'undefined') {
-        ledMat.color.setHex(newColor);
-        ledMat.emissive.setHex(newColor);
-    }
+    window.sceneState.currentLedColorIdx =
+        (window.sceneState.currentLedColorIdx + 1) % ledColors.length;
+    const c = ledColors[window.sceneState.currentLedColorIdx];
+    ledMat.color.setHex(c);
+    ledMat.emissive.setHex(c);
+    ledPoint.color.setHex(c);
 });
 
 document.getElementById('btn-traces')?.addEventListener('click', () => {
     window.sceneState.isTracesVisible = !window.sceneState.isTracesVisible;
-    if (typeof traceMat !== 'undefined') {
-        traceMat.visible = window.sceneState.isTracesVisible;
-    }
+    traceMat.visible = window.sceneState.isTracesVisible;
 });
 
-// -- Back to Top Button --
+/* ═══════════════════════════════════════════════════════════
+   GLASS CARD FLASHLIGHT EFFECT
+═══════════════════════════════════════════════════════════ */
+function attachFlashlight(card) {
+    card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - r.top}px`);
+    });
+}
+document.querySelectorAll('.glass-card').forEach(attachFlashlight);
+
+/* ═══════════════════════════════════════════════════════════
+   HAMBURGER MENU
+═══════════════════════════════════════════════════════════ */
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+
+hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+});
+
+navLinks?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   NAV SCROLL — highlight active / shrink on scroll
+═══════════════════════════════════════════════════════════ */
+const mainNav = document.getElementById('mainNav');
+let   lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    mainNav?.classList.toggle('nav--solid', y > 60);
+    lastScroll = y;
+}, { passive: true });
+
+/* ═══════════════════════════════════════════════════════════
+   LANGUAGE TOGGLE (EN → HE → AR → EN)
+═══════════════════════════════════════════════════════════ */
+const langToggle = document.getElementById('langToggle');
+const LANGS      = ['en', 'he', 'ar'];
+let   langIdx    = 0;
+
+langToggle?.addEventListener('click', () => {
+    langIdx = (langIdx + 1) % LANGS.length;
+    const lang = LANGS[langIdx];
+    document.body.classList.remove('lang-mode-en', 'lang-mode-he', 'lang-mode-ar', 'rtl-mode');
+    document.body.classList.add(`lang-mode-${lang}`);
+    if (lang === 'he' || lang === 'ar') document.body.classList.add('rtl-mode');
+    // Update html lang attribute for accessibility
+    document.documentElement.lang = lang;
+});
+
+/* ═══════════════════════════════════════════════════════════
+   BACK TO TOP
+═══════════════════════════════════════════════════════════ */
 const backToTopBtn = document.getElementById('backToTop');
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.classList.add('visible');
-    } else {
-        backToTopBtn.classList.remove('visible');
-    }
-});
+    backToTopBtn?.classList.toggle('visible', window.scrollY > 350);
+}, { passive: true });
 
 backToTopBtn?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL (IntersectionObserver)
+═══════════════════════════════════════════════════════════ */
+function initReveal() {
+    const els = document.querySelectorAll('.reveal');
+    const io  = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('active');
+            obs.unobserve(entry.target);
+        });
+    }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+
+    els.forEach(el => io.observe(el));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOOT TERMINAL SEQUENCE
+═══════════════════════════════════════════════════════════ */
+const BOOT_LINES = [
+    { text: '> BIOS v2.4.1 — Technion Hardware Lab', cls: '' },
+    { text: '> Initializing memory banks...   [OK]', cls: 't-success' },
+    { text: '> Loading firmware image...       [OK]', cls: 't-success' },
+    { text: '> Compiling C++ runtime...        [OK]', cls: 't-success' },
+    { text: '> Mounting virtual filesystem...  [OK]', cls: 't-success' },
+    { text: '> Scanning peripheral bus...      [OK]', cls: 't-success' },
+    { text: '> Activating 3D environment...    [OK]', cls: 't-success' },
+    { text: '> System ready. Launching UI...', cls: 't-warn' },
+];
+
+function runBootSequence() {
+    const preloader = document.getElementById('preloader');
+    const termText  = document.getElementById('terminal-text');
+    if (!termText) { afterBoot(); return; }
+
+    let idx = 0;
+
+    function nextLine() {
+        if (idx >= BOOT_LINES.length) {
+            setTimeout(afterBoot, 500);
+            return;
+        }
+        const line  = BOOT_LINES[idx++];
+        const div   = document.createElement('div');
+        div.textContent = line.text;
+        if (line.cls) div.classList.add(line.cls);
+        termText.appendChild(div);
+        setTimeout(nextLine, Math.random() * 280 + 80);
+    }
+    nextLine();
+
+    function afterBoot() {
+        preloader?.classList.add('fade-out');
+        document.getElementById('langControlPanel')?.classList.add('visible');
+        setTimeout(initHeroTerminal, 350);
+        setTimeout(initReveal, 200);
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO TERMINAL WIDGET
+   Types out a realistic "firmware_status.sh" readout
+═══════════════════════════════════════════════════════════ */
+const HERO_TERMINAL_LINES = [
+    { text: '#!/bin/bash',                               cls: 't-comment', delay: 0    },
+    { text: '# firmware_status.sh — v1.0.3',             cls: 't-comment', delay: 200  },
+    { text: '',                                           cls: '',          delay: 300  },
+    { text: 'printf "Engineer: Tareq Suliman"',           cls: 't-prompt',  delay: 500  },
+    { text: 'Engineer: Tareq Suliman',                    cls: 't-value',   delay: 900  },
+    { text: '',                                           cls: '',          delay: 950  },
+    { text: 'printf "Focus: Electronics Engineering"',    cls: 't-prompt',  delay: 1100 },
+    { text: 'Focus:    Electronics Engineering',          cls: 't-value',   delay: 1500 },
+    { text: '',                                           cls: '',          delay: 1550 },
+    { text: 'check_year --current',                       cls: 't-prompt',  delay: 1700 },
+    { text: 'Year 1 — Technion, Active',                  cls: 't-value',   delay: 2100 },
+    { text: '',                                           cls: '',          delay: 2150 },
+    { text: 'check_status --availability',                cls: 't-prompt',  delay: 2300 },
+    { text: 'Status: Seeking Internship... Done.',        cls: 't-success', delay: 2800 },
+    { text: '',                                           cls: '',          delay: 2880 },
+    { text: '# Currently learning: C | Electronics',     cls: 't-comment', delay: 3000 },
+    { text: '# Foundation: Physics | Math | Circuits',   cls: 't-comment', delay: 3200 },
+    { text: '',                                           cls: '',          delay: 3280 },
+    { text: 'echo "Ready to learn and grow"',             cls: 't-prompt',  delay: 3400 },
+    { text: 'Ready to learn, build, and grow.',           cls: 't-value',   delay: 3800 },
+    { text: '▋',                                          cls: 'terminal-cursor', delay: 3900 },
+];
+
+
+function initHeroTerminal() {
+    const body = document.getElementById('heroTerminal');
+    if (!body) return;
+
+    HERO_TERMINAL_LINES.forEach(({ text, cls, delay }) => {
+        setTimeout(() => {
+            const line = document.createElement('div');
+            line.classList.add('t-line');
+            if (cls) line.classList.add(cls);
+            line.textContent = text;
+            body.appendChild(line);
+            // Auto-scroll
+            body.scrollTop = body.scrollHeight;
+        }, delay);
+    });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOOT ON DOM READY
+═══════════════════════════════════════════════════════════ */
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runBootSequence);
+} else {
+    runBootSequence();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ACTIVE NAV LINK ON SCROLL
+═══════════════════════════════════════════════════════════ */
+function updateActiveNav() {
+    const sections = document.querySelectorAll('main section[id]');
+    const links    = document.querySelectorAll('.nav-link');
+
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const id = entry.target.id;
+            links.forEach(link => {
+                const match = link.getAttribute('href') === `#${id}`;
+                link.style.color  = match ? 'var(--accent)' : '';
+                link.style.background = match ? 'var(--accent-dim)' : '';
+            });
+        });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+    sections.forEach(s => io.observe(s));
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateActiveNav();
+    // Re-attach flashlight to any cards rendered after boot
+    document.querySelectorAll('.glass-card').forEach(attachFlashlight);
 });
